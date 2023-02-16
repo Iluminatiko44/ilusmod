@@ -1,6 +1,6 @@
-package com.iluminatiko.ilusmod;
+package io.github.Iluminatiko44.ilusmod;
 
-import com.iluminatiko.ilusmod.Init.ItemInit;
+import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
@@ -29,21 +29,16 @@ import org.slf4j.Logger;
 @Mod(Ilusmod.MODID)
 public class Ilusmod
 {
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "ilusmod";
 
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 
-    // Create a Deferred Register to hold Items which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    // Creates a new Block with the id "ilusmod:pseudo_ice", combining the namespace and path
-    public static final RegistryObject<Block> PSEUDO_ICE = BLOCKS.register("pseudo_ice", () -> new Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE).friction(1.0f)));
-    // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
+    public static final RegistryObject<Block> PSEUDO_ICE = BLOCKS.register("pseudo_ice", () -> new Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE).friction(1.1f)));
+
     public static final RegistryObject<Item> PSEUDO_ICE_ITEM = ITEMS.register("pseudo_ice", () -> new BlockItem(PSEUDO_ICE.get(), new Item.Properties()));
 
 
@@ -56,9 +51,8 @@ public class Ilusmod
 
         // Register the Item Initializer
         ItemInit.ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so blocks get registered
+
         BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in

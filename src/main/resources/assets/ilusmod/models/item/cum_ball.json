@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ilusmod:items/cum_ball"
+    "layer0": "ilusmod:item/cum_ball"
   }
 }
