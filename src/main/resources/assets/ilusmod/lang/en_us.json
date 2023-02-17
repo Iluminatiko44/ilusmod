@@ -1,7 +1,5 @@
 {
-  "language.name": "English",
-  "language.region": "United States",
-  "language.code": "en_us",
-  "item.ilusmod.cum_ball": "Cum Ball",
-  "block.ilusmod.cum_block": "Cum Block"
+  "item.ilusmod.happy_ball": "Happy Ball",
+  "block.ilusmod.happy_block": "Happy Block",
+  "block.ilusmod.pseudo_ice": "Pseudo Ice"
 }

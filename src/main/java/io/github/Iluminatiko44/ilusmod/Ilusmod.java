@@ -1,5 +1,6 @@
 package io.github.Iluminatiko44.ilusmod;
 
+import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -25,6 +26,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
+//import static io.github.Iluminatiko44.ilusmod.Init.ItemInit.HAPPY_BLOCK;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Ilusmod.MODID)
 public class Ilusmod
@@ -37,7 +40,7 @@ public class Ilusmod
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    public static final RegistryObject<Block> PSEUDO_ICE = BLOCKS.register("pseudo_ice", () -> new Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE).friction(1.1f)));
+    public static final RegistryObject<Block> PSEUDO_ICE = BLOCKS.register("pseudo_ice", () -> new Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE).friction(1.2f)));
 
     public static final RegistryObject<Item> PSEUDO_ICE_ITEM = ITEMS.register("pseudo_ice", () -> new BlockItem(PSEUDO_ICE.get(), new Item.Properties()));
 
@@ -50,6 +53,7 @@ public class Ilusmod
         modEventBus.addListener(this::commonSetup);
 
         // Register the Item Initializer
+        BlockInit.BLOCKS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
 
         BLOCKS.register(modEventBus);
@@ -71,8 +75,10 @@ public class Ilusmod
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
-        if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS)
+        if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(PSEUDO_ICE_ITEM);
+            //event.accept(HAPPY_BLOCK);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
