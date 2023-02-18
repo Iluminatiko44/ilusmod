@@ -19,6 +19,9 @@ public class BlockInit {
             () -> new Block(Block.Properties.of(Material.CLAY)),
                   new Item.Properties());
 
+    public static final RegistryObject<Block> PSEUDO_ICE = register("pseudo_ice",
+            () -> new Block(Block.Properties.of(Material.CLAY).friction(1.2f)),
+            new Item.Properties());
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);

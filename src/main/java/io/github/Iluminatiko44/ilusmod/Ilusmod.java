@@ -40,11 +40,6 @@ public class Ilusmod
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    public static final RegistryObject<Block> PSEUDO_ICE = BLOCKS.register("pseudo_ice", () -> new Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE).friction(1.2f)));
-
-    public static final RegistryObject<Item> PSEUDO_ICE_ITEM = ITEMS.register("pseudo_ice", () -> new BlockItem(PSEUDO_ICE.get(), new Item.Properties()));
-
-
     public Ilusmod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -76,7 +71,7 @@ public class Ilusmod
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(PSEUDO_ICE_ITEM);
+            //event.accept(PSEUDO_ICE_ITEM);
             //event.accept(HAPPY_BLOCK);
         }
     }
