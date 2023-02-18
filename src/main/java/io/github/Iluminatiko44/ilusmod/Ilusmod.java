@@ -26,7 +26,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
-//import static io.github.Iluminatiko44.ilusmod.Init.ItemInit.HAPPY_BLOCK;
+import static io.github.Iluminatiko44.ilusmod.Init.BlockInit.HAPPY_BLOCK;
+import static io.github.Iluminatiko44.ilusmod.Init.BlockInit.PSEUDO_ICE;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Ilusmod.MODID)
@@ -69,11 +70,11 @@ public class Ilusmod
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
-    {
+    {/*
         if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
-            //event.accept(PSEUDO_ICE_ITEM);
-            //event.accept(HAPPY_BLOCK);
-        }
+            event.accept(PSEUDO_ICE);
+            event.accept(HAPPY_BLOCK);
+        }*/
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
