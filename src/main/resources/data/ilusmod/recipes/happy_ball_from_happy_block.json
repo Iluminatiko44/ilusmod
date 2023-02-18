@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ilusmod:happy_block"
+    }
+  ],
+  "result": {
+    "item": "ilusmod:happy_ball",
+    "count": 4
+  }
+}

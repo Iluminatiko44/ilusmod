@@ -1,5 +1,7 @@
 {
   "item.ilusmod.happy_ball": "Happy Ball",
   "block.ilusmod.happy_block": "Happy Block",
-  "block.ilusmod.pseudo_ice": "Pseudo Ice"
+  "block.ilusmod.pseudo_ice": "Pseudo Ice",
+
+  "creativemodetab.ilusmod_tab": "Ilus Mod"
 }

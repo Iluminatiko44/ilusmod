@@ -1,16 +1,13 @@
 package io.github.Iluminatiko44.ilusmod;
 
-import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
-import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import com.mojang.logging.LogUtils;
+import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
+import io.github.Iluminatiko44.ilusmod.Init.CreativeTabsInit;
+import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -23,13 +20,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
-import static io.github.Iluminatiko44.ilusmod.Init.BlockInit.HAPPY_BLOCK;
-import static io.github.Iluminatiko44.ilusmod.Init.BlockInit.PSEUDO_ICE;
-
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Ilusmod.MODID)
 public class Ilusmod
 {
@@ -70,11 +62,12 @@ public class Ilusmod
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
-    {/*
-        if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(PSEUDO_ICE);
-            event.accept(HAPPY_BLOCK);
-        }*/
+    {
+        if (event.getTab() == CreativeTabsInit.ILUSTAB) {
+            event.accept(BlockInit.HAPPY_BLOCK);
+            event.accept(BlockInit.PSEUDO_ICE);
+            event.accept(ItemInit.HAPPY_BALL);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
