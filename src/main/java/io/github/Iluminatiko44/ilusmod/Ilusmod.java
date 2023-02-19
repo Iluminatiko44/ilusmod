@@ -67,6 +67,8 @@ public class Ilusmod
             event.accept(BlockInit.HAPPY_BLOCK);
             event.accept(BlockInit.PSEUDO_ICE);
             event.accept(ItemInit.HAPPY_BALL);
+            event.accept(ItemInit.GRAPES);
+            event.accept(ItemInit.POMMES);
         }
     }
 
