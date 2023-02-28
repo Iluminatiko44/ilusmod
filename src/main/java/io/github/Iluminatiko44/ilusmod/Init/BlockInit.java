@@ -23,6 +23,11 @@ public class BlockInit {
             () -> new Block(Block.Properties.of(Material.CLAY).friction(1.2f).strength(3.0f, 1.0f).requiresCorrectToolForDrops()),
             new Item.Properties().stacksTo(128));
 
+    @SuppressWarnings("rawtypes") // Yes, I know this is bad practice, but I don't know how to fix it
+    public static final RegistryObject[] ILUSBLOCKS = {
+            HAPPY_BLOCK,
+            PSEUDO_ICE
+    };
     // A supplier for making the item block easier
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
         RegistryObject<T> block = BLOCKS.register(name, supplier);

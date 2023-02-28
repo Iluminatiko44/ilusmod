@@ -18,6 +18,5 @@ public class CreativeTabsInit {
     public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event) {
         ILUSTAB = event.registerCreativeModeTab(new ResourceLocation(Ilusmod.MODID, "ilusmod_tab"),
                         builder -> builder.icon(() -> ItemInit.HAPPY_BALL.get().getDefaultInstance()).title(Component.translatable("creativemodetab.ilusmod_tab")));
-
     }
 }

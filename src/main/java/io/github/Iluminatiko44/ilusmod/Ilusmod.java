@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 @Mod(Ilusmod.MODID)
@@ -61,14 +62,17 @@ public class Ilusmod
         LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"}) // Yes, I know this is bad practice, but I don't know how to fix it
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == CreativeTabsInit.ILUSTAB) {
-            event.accept(BlockInit.HAPPY_BLOCK);
-            event.accept(BlockInit.PSEUDO_ICE);
-            event.accept(ItemInit.HAPPY_BALL);
-            event.accept(ItemInit.GRAPES);
-            event.accept(ItemInit.POMMES);
+            for(RegistryObject ob : BlockInit.ILUSBLOCKS) {
+                event.accept(ob);
+            }
+            for(RegistryObject ob : ItemInit.ILUSITEMS) {
+                event.accept(ob);
+            }
+
         }
     }
 
