@@ -15,6 +15,8 @@ public class ItemInit {
     // Values for normal items to happy item: brightness+20, saturation = 0
     public static final RegistryObject<Item> HAPPY_BALL = ITEMS.register("happy_ball", () -> new Item(getProps()));
 
+    public static final RegistryObject<Item> HAPPY_INGOT = ITEMS.register("happy_ingot", () -> new Item(getProps()));
+
     public static final RegistryObject<Item> GRAPES = ITEMS.register("grapes", () -> new Item(getProps().food(Foods.GRAPES)));
 
     public static final RegistryObject<Item> POMMES = ITEMS.register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
@@ -24,9 +26,9 @@ public class ItemInit {
         public static final FoodProperties POMMES = new FoodProperties.Builder().nutrition(8).saturationMod(0)
                                                                                 .effect(() -> new MobEffectInstance(MobEffects.POISON, 20*10, 4), 0.1f)             // giving the player a poison effect (0.1%) for 10 seconds (20 ticks per second)
                                                                                 .effect(() -> new MobEffectInstance(MobEffects.WITHER, 20*10, 5), 0.01f).build();   // giving the player a wither effect (0.01%) for 10 seconds (20 ticks per second)
-
     }
 
+    // Normal tools from happy items
     public static final RegistryObject<SwordItem> HAPPY_SWORD = ITEMS.register("happy_sword", () -> new SwordItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
 
     public static final RegistryObject<PickaxeItem> HAPPY_PICKAXE = ITEMS.register("happy_pickaxe", () -> new PickaxeItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
@@ -40,6 +42,7 @@ public class ItemInit {
     @SuppressWarnings("rawtypes") // Yes, I know this is bad practice, but I don't know how to fix it
     public static final RegistryObject[] ILUSITEMS = {
             HAPPY_BALL,
+            HAPPY_INGOT,
             GRAPES,
             POMMES,
             HAPPY_SWORD,
