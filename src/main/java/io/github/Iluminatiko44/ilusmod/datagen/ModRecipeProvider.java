@@ -37,7 +37,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 RecipeCategory.MISC, ItemInit.HAPPY_INGOT.get(), 0.7f, 200, "happy_ball");
         // Happy Balls to Happy Block, 1: consumer, 2: recipe category, 3: output, 4: input
         twoByTwoPacker(consumer, RecipeCategory.MISC, BlockInit.HAPPY_BLOCK.get(), ItemInit.HAPPY_BALL.get());
-
+        // Happy Block to Happy Balls
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemInit.HAPPY_BALL.get(), 4)
+                .requires(BlockInit.HAPPY_BLOCK.get())
+                .unlockedBy(getHasName(BlockInit.HAPPY_BLOCK.get())
+                        , has(BlockInit.HAPPY_BLOCK.get()))
+                .save(consumer);
         // Happy Ingot to Happy Sword 1: output, 2: material, 3: consumer
         swordWStickBuilding(ItemInit.HAPPY_SWORD.get(), ItemInit.HAPPY_INGOT.get(), consumer);
         pickaxeWStickBuilding(ItemInit.HAPPY_PICKAXE.get(), ItemInit.HAPPY_INGOT.get(), consumer);

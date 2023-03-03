@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "minecraft:stick"
+    },
+    "M": {
+      "item": "ilusmod:happy_ingot"
+    }
+  },
+  "pattern": [
+    "M",
+    "M",
+    "H"
+  ],
+  "result": {
+    "item": "ilusmod:happy_sword"
+  }
+}

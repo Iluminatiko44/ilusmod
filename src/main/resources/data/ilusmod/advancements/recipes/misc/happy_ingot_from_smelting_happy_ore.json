@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_happy_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ilusmod:happy_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ilusmod:happy_ingot_from_smelting_happy_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_happy_ore",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ilusmod:happy_ingot_from_smelting_happy_ore"
+    ]
+  }
+}

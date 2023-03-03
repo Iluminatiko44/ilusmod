@@ -8,7 +8,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Ilusmod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Ilusmod.MODID)
 public class DataGenerators {
 
     @SubscribeEvent
@@ -26,4 +26,4 @@ public class DataGenerators {
 
     }
 
-    }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "happy_ball",
+  "ingredient": {
+    "item": "ilusmod:happy_ore_netherrack"
+  },
+  "result": "ilusmod:happy_ingot"
+}

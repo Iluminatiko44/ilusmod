@@ -21,6 +21,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemInit.HAPPY_BALL);
         simpleItem(ItemInit.GRAPES);
         simpleItem(ItemInit.POMMES);
+        simpleItem(ItemInit.HAPPY_INGOT);
         swordHandheldItem(ItemInit.HAPPY_SWORD);
         axeHandheldItem(ItemInit.HAPPY_AXE);
         pickaxeHandheldItem(ItemInit.HAPPY_PICKAXE);
@@ -39,6 +40,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(Ilusmod.MODID, "item/" + item.getId().getPath()));
     }
+    // I don't know why, but it doesn't work with the Item class
+    //
     private ItemModelBuilder swordHandheldItem(RegistryObject<SwordItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
