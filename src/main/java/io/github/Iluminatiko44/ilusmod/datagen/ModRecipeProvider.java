@@ -3,7 +3,6 @@ package io.github.Iluminatiko44.ilusmod.datagen;
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
-import net.minecraft.client.tutorial.Tutorial;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
