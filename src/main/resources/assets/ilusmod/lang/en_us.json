@@ -1,0 +1,19 @@
+{
+  "block.ilusmod.happy_block": "Happy Block",
+  "block.ilusmod.happy_log": "Happy Log",
+  "block.ilusmod.happy_ore": "Happy Ore",
+  "block.ilusmod.happy_ore_deepslate": "Deepslate Happy Ore",
+  "block.ilusmod.happy_ore_endstone": "Endstone Happy Ore",
+  "block.ilusmod.happy_ore_netherrack": "Nether Happy Ore",
+  "block.ilusmod.pseudo_ice": "Pseudo Ice",
+  "item.ilusmod.grapes": "Grapes",
+  "item.ilusmod.happy_axe": "Happy Axe",
+  "item.ilusmod.happy_ball": "Happy Ball",
+  "item.ilusmod.happy_hoe": "Happy Hoe",
+  "item.ilusmod.happy_ingot": "Happy Ingot",
+  "item.ilusmod.happy_pickaxe": "Happy Pickaxe",
+  "item.ilusmod.happy_shovel": "Happy Shovel",
+  "item.ilusmod.happy_sword": "Happy Sword",
+  "item.ilusmod.pommes": "Pommes",
+  "itemGroup.ilusmod": "Ilusmod"
+}

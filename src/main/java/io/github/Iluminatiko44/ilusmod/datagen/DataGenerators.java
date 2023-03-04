@@ -22,8 +22,7 @@ public class DataGenerators {
         generator.addProvider(true, ModLootTableProvider.create(output));
         generator.addProvider(true, new ModBlockStateProvider(output, existingFileHelper));
         generator.addProvider(true, new ModItemModelProvider(output, existingFileHelper));
-
-
+        generator.addProvider(true, new ModLanguageProvider(output, "en_us"));
     }
 
 }
