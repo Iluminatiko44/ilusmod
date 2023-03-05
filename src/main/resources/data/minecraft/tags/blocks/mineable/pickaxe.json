@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values" : [
+    "ilusmod:pseudo_ice",
+    "ilusmod:happy_ore",
+    "ilusmod:happy_ore_deepslate",
+    "ilusmod:happy_ore_netherrack",
+    "ilusmod:happy_ore_endstone"
+  ]
+}
