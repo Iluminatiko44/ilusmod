@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "ilusmod:block/stripped_happy_log_top",
+    "side": "ilusmod:block/stripped_happy_log"
+  }
+}

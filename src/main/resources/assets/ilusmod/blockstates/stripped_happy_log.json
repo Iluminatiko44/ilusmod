@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "ilusmod:block/stripped_happy_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "ilusmod:block/stripped_happy_log"
+    },
+    "axis=z": {
+      "model": "ilusmod:block/stripped_happy_log_horizontal",
+      "x": 90
+    }
+  }
+}

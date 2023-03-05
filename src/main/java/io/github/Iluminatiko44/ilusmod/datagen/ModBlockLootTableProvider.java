@@ -23,15 +23,24 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        // Drops itself
-        dropSelf(BlockInit.HAPPY_BLOCK.get());
+        // TODO: Remake the changes in https://github.com/Iluminatiko44/ilusmod/commit/23314cd8bf962bf1ec3cf72144d8f3b922356cfc
+        add(BlockInit.HAPPY_BLOCK.get(), (block) -> createMultipleOreDrops(BlockInit.HAPPY_BLOCK.get(), ItemInit.HAPPY_BALL.get(), 4.0f, 4.1f));
         // Only drops itself when silk touched
         add(BlockInit.PSEUDO_ICE.get(), (block) -> createSilkTouchOnlyTable(BlockInit.PSEUDO_ICE.get()));
-        // Drops happy ball
+        // Drops happy balls
         add(BlockInit.HAPPY_ORE.get(), (block) -> createMultipleOreDrops(BlockInit.HAPPY_ORE.get(), ItemInit.HAPPY_BALL.get(), 3.0f, 4.0f));
         add(BlockInit.DEEPSLATE_HAPPY_ORE.get(), (block) -> createMultipleOreDrops(BlockInit.DEEPSLATE_HAPPY_ORE.get(), ItemInit.HAPPY_BALL.get(), 3.0f, 4.0f));
         add(BlockInit.ENDSTONE_HAPPY_ORE.get(), (block) -> createMultipleOreDrops(BlockInit.ENDSTONE_HAPPY_ORE.get(), ItemInit.HAPPY_BALL.get(), 3.0f, 4.0f));
         add(BlockInit.NETHERRACK_HAPPY_ORE.get(), (block) -> createMultipleOreDrops(BlockInit.NETHERRACK_HAPPY_ORE.get(), ItemInit.HAPPY_BALL.get(), 3.0f, 4.0f));
+
+        this.dropSelf(BlockInit.HAPPY_LOG.get());
+        this.dropSelf(BlockInit.STRIPPED_HAPPY_LOG.get());
+        this.dropSelf(BlockInit.HAPPY_WOOD.get());
+        this.dropSelf(BlockInit.STRIPPED_HAPPY_WOOD.get());
+        this.dropSelf(BlockInit.HAPPY_PLANKS.get());
+        this.dropSelf(BlockInit.HAPPY_SAPLING.get());
+
+        this.add(BlockInit.HAPPY_LEAVES.get(), (block) -> createLeavesDrops(block, BlockInit.HAPPY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
     }
 
     @Override
@@ -41,7 +50,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     // This has to be here, because there is no standard method for creating ore drops with multiple items
-    @SuppressWarnings("SameParameterValue")
     protected LootTable.Builder createMultipleOreDrops(Block p_251906_, Item drop, float min, float max) {
         return createSilkTouchDispatchTable(p_251906_, this.applyExplosionDecay(p_251906_, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
     }

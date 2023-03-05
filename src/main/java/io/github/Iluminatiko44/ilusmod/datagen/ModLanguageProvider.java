@@ -14,6 +14,7 @@ public class ModLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("itemGroup.ilusmod", "Ilusmod");
+
         add("item."+id+".happy_ball", "Happy Ball");
         add("item."+id+".grapes", "Grapes");
         add("item."+id+".pommes", "Pommes");
@@ -23,6 +24,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("item."+id+".happy_pickaxe", "Happy Pickaxe");
         add("item."+id+".happy_shovel", "Happy Shovel");
         add("item."+id+".happy_hoe", "Happy Hoe");
+
         add("block."+id+".happy_block", "Happy Block");
         add("block."+id+".happy_ore", "Happy Ore");
         add("block."+id+".happy_ore_deepslate", "Deepslate Happy Ore");
@@ -30,5 +32,11 @@ public class ModLanguageProvider extends LanguageProvider {
         add("block."+id+".happy_ore_netherrack", "Nether Happy Ore");
         add("block."+id+".pseudo_ice", "Pseudo Ice");
         add("block."+id+".happy_log", "Happy Log");
+        add("block."+id+".happy_wood", "Happy Wood");
+        add("block."+id+".stripped_happy_log", "Stripped Happy Log");
+        add("block."+id+".stripped_happy_wood", "Stripped Happy Wood");
+        add("block."+id+".happy_leaves", "Happy Leaves");
+        add("block."+id+".happy_sapling", "Happy Sapling");
+        add("block."+id+".happy_planks", "Happy Planks");
     }
 }
