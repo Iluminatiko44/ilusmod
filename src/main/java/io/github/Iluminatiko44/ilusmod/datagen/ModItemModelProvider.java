@@ -38,7 +38,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                         new ResourceLocation(Ilusmod.MODID, "item/" + item.getId().getPath()));
 
-    }@SuppressWarnings("UnusedReturnValue")
+    }
+    @SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",

@@ -5,6 +5,9 @@ import io.github.Iluminatiko44.ilusmod.Init.custom.ModFlammableRotatedPillarBloc
 import io.github.Iluminatiko44.ilusmod.worldGen.tree.HappyTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -105,5 +108,10 @@ public class BlockInit {
         ItemInit.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
 
         return block;
+    }
+
+    // Tags...
+    public static class Tags {
+        public static final TagKey<Block> HAPPY_LEAVES = BlockTags.create(new ResourceLocation(Ilusmod.MODID, "happy_leaves"));
     }
 }
