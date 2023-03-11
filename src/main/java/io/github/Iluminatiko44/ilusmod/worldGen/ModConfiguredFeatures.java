@@ -27,7 +27,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HAPPY_KEY = registerKey("happy");
 
     // TODO: Understand Trees...
-    // TODO: Understand the holderset parameter for the happy_leaves (currently Tags.Block.ORES)
+    // TODO: Understand the holder set parameter for the happy_leaves (currently Tags.Block.ORES)
     public static void bootstrap(BootstapContext< ConfiguredFeature<?, ?> > context) {
         HolderGetter<Block> holdergetter = context.lookup(Registries.BLOCK);
         register(
@@ -46,6 +46,7 @@ public class ModConfiguredFeatures {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Ilusmod.MODID, name));
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static < FC extends FeatureConfiguration, F extends Feature<FC> > void register(BootstapContext< ConfiguredFeature<?, ?> > context,
                                                                                             ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
         context.register(key, new ConfiguredFeature<>(feature, config));

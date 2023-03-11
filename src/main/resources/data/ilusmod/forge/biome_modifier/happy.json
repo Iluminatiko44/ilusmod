@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_cold",
+  "features": "ilusmod:happy_placed",
+  "step": "vegetal_decoration"
+}
