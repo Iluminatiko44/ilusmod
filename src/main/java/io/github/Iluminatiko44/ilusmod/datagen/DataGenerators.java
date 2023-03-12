@@ -28,6 +28,7 @@ public class DataGenerators {
         generator.addProvider(true, new ModItemModelProvider(output, existingFileHelper));
         generator.addProvider(true, new ModLanguageProvider(output, "en_us"));
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(output, lookupProvider));
+        generator.addProvider(true, new ModBlocksTagsProvider(output, lookupProvider, existingFileHelper));
     }
 
 }
