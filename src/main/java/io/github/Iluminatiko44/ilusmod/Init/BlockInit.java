@@ -5,9 +5,6 @@ import io.github.Iluminatiko44.ilusmod.Init.custom.ModFlammableRotatedPillarBloc
 import io.github.Iluminatiko44.ilusmod.worldGen.tree.HappyTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -21,6 +18,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class BlockInit {
@@ -82,23 +80,23 @@ public class BlockInit {
                     Block.Properties.copy(Blocks.OAK_SAPLING)),
             new Item.Properties());
 
-
-    @SuppressWarnings("rawtypes") // Yes, I know this is bad practice, but I don't know how to fix it
-    public static final RegistryObject[] ILUSBLOCKS = {
-            HAPPY_BLOCK,
-            HAPPY_ORE,
-            DEEPSLATE_HAPPY_ORE,
-            ENDSTONE_HAPPY_ORE,
-            NETHERRACK_HAPPY_ORE,
-            PSEUDO_ICE,
-            HAPPY_LOG,
-            HAPPY_WOOD,
-            STRIPPED_HAPPY_LOG,
-            STRIPPED_HAPPY_WOOD,
-            HAPPY_PLANKS,
-            HAPPY_LEAVES,
-            HAPPY_SAPLING
-    };
+    public static final List<RegistryObject<Block>> ILUSBLOCKS = List.of(
+            HAPPY_BLOCK, // 0
+            HAPPY_ORE, // 1
+            DEEPSLATE_HAPPY_ORE, // 2
+            ENDSTONE_HAPPY_ORE, // 3
+            NETHERRACK_HAPPY_ORE, // 4
+            PSEUDO_ICE, // 5
+            HAPPY_LOG, // 6
+            HAPPY_WOOD, // 7
+            STRIPPED_HAPPY_LOG, // 8
+            STRIPPED_HAPPY_WOOD, // 9
+            HAPPY_PLANKS, // 10
+            HAPPY_LEAVES, // 11
+            HAPPY_SAPLING // 12
+    );
+    public static final List<RegistryObject<Block>> ORES = ILUSBLOCKS.subList(1, 5);
+    public static final List<RegistryObject<Block>> WOODEN = ILUSBLOCKS.subList(6, 11);
 
     // A supplier for making the item block easier
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
@@ -110,8 +108,4 @@ public class BlockInit {
         return block;
     }
 
-    // Tags...
-    public static class Tags {
-        public static final TagKey<Block> HAPPY_LEAVES = BlockTags.create(new ResourceLocation(Ilusmod.MODID, "happy_leaves"));
-    }
 }

@@ -9,6 +9,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Ilusmod.MODID);
 
@@ -39,8 +41,7 @@ public class ItemInit {
 
     public static final RegistryObject<HoeItem> HAPPY_HOE = ITEMS.register("happy_hoe", () -> new HoeItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
 
-    @SuppressWarnings("rawtypes") // Yes, I know this is bad practice, but I don't know how to fix it
-    public static final RegistryObject[] ILUSITEMS = {
+    public static final List<RegistryObject<? extends Item>> ILUSITEMS = List.of(
             HAPPY_BALL,
             HAPPY_INGOT,
             GRAPES,
@@ -50,7 +51,7 @@ public class ItemInit {
             HAPPY_AXE,
             HAPPY_SHOVEL,
             HAPPY_HOE
-    };
+    );
 
     public static Item.Properties getProps() {
         return new Item.Properties();
