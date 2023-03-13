@@ -59,7 +59,7 @@ public class ModConfiguredFeatures {
         register(
                 context, HAPPY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(BlockInit.HAPPY_LOG.get()),                                                                                                                   // DIESE SCHEISSE IST DER TRUNK PLACER
-                    new UpwardsBranchingTrunkPlacer(10, 4, 4, UniformInt.of(3,6), 0.2f, UniformInt.of(3,6), HolderSet.direct(holdergetter.getOrThrow(BlockInit.HAPPY_LEAVES.getKey()))),
+                    new UpwardsBranchingTrunkPlacer(10, 4, 4, UniformInt.of(3,6), 0.2f, UniformInt.of(3,6), HolderSet.direct(BlockInit.HAPPY_LEAVES.getHolder().get())),
                     BlockStateProvider.simple(BlockInit.HAPPY_LEAVES.get()),
                     new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                     new ThreeLayersFeatureSize(4, 4, 3, 4, 3,OptionalInt.of(2))).build()

@@ -38,5 +38,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("block."+id+".happy_leaves", "Happy Leaves");
         add("block."+id+".happy_sapling", "Happy Sapling");
         add("block."+id+".happy_planks", "Happy Planks");
+
+        add("creativemodetab."+id+"_tab", "Ilusmod");
     }
 }

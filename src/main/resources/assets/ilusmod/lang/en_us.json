@@ -12,6 +12,7 @@
   "block.ilusmod.pseudo_ice": "Pseudo Ice",
   "block.ilusmod.stripped_happy_log": "Stripped Happy Log",
   "block.ilusmod.stripped_happy_wood": "Stripped Happy Wood",
+  "creativemodetab.ilusmod_tab": "Ilusmod",
   "item.ilusmod.grapes": "Grapes",
   "item.ilusmod.happy_axe": "Happy Axe",
   "item.ilusmod.happy_ball": "Happy Ball",
@@ -21,6 +22,5 @@
   "item.ilusmod.happy_shovel": "Happy Shovel",
   "item.ilusmod.happy_sword": "Happy Sword",
   "item.ilusmod.pommes": "Pommes",
-  "itemGroup.ilusmod": "Ilusmod",
-  "creativemodetab.ilusmod_tab": "Ilusmod"
+  "itemGroup.ilusmod": "Ilusmod"
 }
