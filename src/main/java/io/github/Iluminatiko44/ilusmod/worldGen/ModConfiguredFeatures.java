@@ -3,6 +3,7 @@ package io.github.Iluminatiko44.ilusmod.worldGen;
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -24,7 +25,6 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.UpwardsBranchingT
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraftforge.common.Tags;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -37,8 +37,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> END_HAPPY_ORE_KEY = registerKey("end_happy_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_HAPPY_ORE_KEY = registerKey("nether_happy_ore");
 
-    // TODO: Understand Trees...
-    // TODO: Understand the holder set parameter for the happy_leaves (currently Tags.Block.ORES)
+    @SuppressWarnings("ConstantConditions")
     public static void bootstrap(BootstapContext< ConfiguredFeature<?, ?> > context) {
         HolderGetter<Block> holdergetter = context.lookup(Registries.BLOCK);
         RuleTest stoneReplaceable = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -59,8 +58,8 @@ public class ModConfiguredFeatures {
         // Tree
         register(
                 context, HAPPY_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(BlockInit.HAPPY_LOG.get()),
-                    new UpwardsBranchingTrunkPlacer(10, 4, 4, UniformInt.of(3,6), 0.2f, UniformInt.of(3,6), holdergetter.getOrThrow(Tags.Blocks.ORES)),
+                    BlockStateProvider.simple(BlockInit.HAPPY_LOG.get()),                                                                                                                   // DIESE SCHEISSE IST DER TRUNK PLACER
+                    new UpwardsBranchingTrunkPlacer(10, 4, 4, UniformInt.of(3,6), 0.2f, UniformInt.of(3,6), HolderSet.direct(holdergetter.getOrThrow(BlockInit.HAPPY_LEAVES.getKey()))),
                     BlockStateProvider.simple(BlockInit.HAPPY_LEAVES.get()),
                     new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                     new ThreeLayersFeatureSize(4, 4, 3, 4, 3,OptionalInt.of(2))).build()
