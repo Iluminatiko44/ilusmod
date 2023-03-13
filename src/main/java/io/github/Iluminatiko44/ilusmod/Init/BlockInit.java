@@ -18,12 +18,30 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Ilusmod.MODID);
+
+    public static List<RegistryObject<Block>> ILUSBLOCKS = new ArrayList<>();/*List.of(
+            HAPPY_BLOCK, // 0
+            HAPPY_ORE, // 1
+            DEEPSLATE_HAPPY_ORE, // 2
+            ENDSTONE_HAPPY_ORE, // 3
+            NETHERRACK_HAPPY_ORE, // 4
+            PSEUDO_ICE, // 5
+            HAPPY_LOG, // 6
+            HAPPY_WOOD, // 7
+            STRIPPED_HAPPY_LOG, // 8
+            STRIPPED_HAPPY_WOOD, // 9
+            HAPPY_PLANKS, // 10
+            HAPPY_LEAVES, // 11
+            HAPPY_SAPLING // 12
+    );*/
+    public static List<RegistryObject<Item>> BlockItems = new ArrayList<>();
 
     public static final RegistryObject<Block> HAPPY_BLOCK = register("happy_block",
             () -> new Block(Block.Properties.of(Material.CLAY).strength(1.5f, 10.0f).requiresCorrectToolForDrops()),
@@ -80,31 +98,21 @@ public class BlockInit {
                     Block.Properties.copy(Blocks.OAK_SAPLING)),
             new Item.Properties());
 
-    public static final List<RegistryObject<Block>> ILUSBLOCKS = List.of(
-            HAPPY_BLOCK, // 0
-            HAPPY_ORE, // 1
-            DEEPSLATE_HAPPY_ORE, // 2
-            ENDSTONE_HAPPY_ORE, // 3
-            NETHERRACK_HAPPY_ORE, // 4
-            PSEUDO_ICE, // 5
-            HAPPY_LOG, // 6
-            HAPPY_WOOD, // 7
-            STRIPPED_HAPPY_LOG, // 8
-            STRIPPED_HAPPY_WOOD, // 9
-            HAPPY_PLANKS, // 10
-            HAPPY_LEAVES, // 11
-            HAPPY_SAPLING // 12
-    );
-    public static final List<RegistryObject<Block>> ORES = ILUSBLOCKS.subList(1, 5);
-    public static final List<RegistryObject<Block>> WOODEN = ILUSBLOCKS.subList(6, 11);
+
+    public static final List<RegistryObject<Block> > ORES = ILUSBLOCKS.subList(1, 5);
+    @SuppressWarnings("unused")
+    public static final List<RegistryObject<Block> > WOODEN = ILUSBLOCKS.subList(6, 11);
+    public static final List<RegistryObject<Block> > LOGS = ILUSBLOCKS.subList(6, 10);
+    public static final List<RegistryObject<Item> > LOG_ITEMS = BlockItems.subList(6, 10);
 
     // A supplier for making the item block easier
-    private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties) {
+    private static RegistryObject<Block> register(String name, Supplier<Block> supplier, Item.Properties properties) {
         // Register the block
-        RegistryObject<T> block = BLOCKS.register(name, supplier);
-        // Register the item block
-        ItemInit.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
-
+        RegistryObject<Block> block = BLOCKS.register(name, supplier);
+        ILUSBLOCKS.add(block);
+        // Register the item block in own class ItemInit
+        RegistryObject<Item> blockItem = ItemInit.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
+        BlockItems.add(blockItem);
         return block;
     }
 
