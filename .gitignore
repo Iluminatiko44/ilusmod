@@ -26,4 +26,4 @@ forge*changelog.txt
 
 # My Files
 /src/main/resources/assets/ilusmod/GIMP/
-/src/generated/
+/src/generated/*
