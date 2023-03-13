@@ -48,8 +48,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         axeWStickBuilding(ItemInit.HAPPY_AXE.get(), ItemInit.HAPPY_INGOT.get(), consumer);
         shovelWStickBuilding(ItemInit.HAPPY_SHOVEL.get(), ItemInit.HAPPY_INGOT.get(), consumer);
         hoeWStickBuilding(ItemInit.HAPPY_HOE.get(), ItemInit.HAPPY_INGOT.get(), consumer);
+
+        //for(RegistryObject<Block> log : BlockInit.LOGS) {
+            RecipeProvider.planksFromLog(consumer, BlockInit.HAPPY_PLANKS.get(), ModTagsProvider.ItemTagsProvider.HAPPY_LOGS, 4);
+        //}
     }
 
+    // See RecipeProvider.java for more info
 
     // This has to be here, so the data generates in the right place (It would be under the "minecraft" modid otherwise)
     // Yes, this is just copied
