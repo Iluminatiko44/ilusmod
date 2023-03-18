@@ -23,6 +23,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
+import java.util.Collection;
+
 @Mod(Ilusmod.MODID)
 public class Ilusmod
 {
@@ -62,14 +64,15 @@ public class Ilusmod
         LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"}) // Yes, I know this is bad practice, but I don't know how to fix it
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == CreativeTabsInit.ILUSTAB) {
-            for(RegistryObject ob : BlockInit.ILUSBLOCKS) {
+            Collection<RegistryObject<Block> > block =  BlockInit.BLOCKS.getEntries();
+            for(RegistryObject<Block> ob : block) {
                 event.accept(ob);
             }
-            for(RegistryObject ob : ItemInit.ILUSITEMS) {
+            Collection< RegistryObject<Item> > items =  ItemInit.ITEMS.getEntries();
+            for(RegistryObject<Item> ob : items) {
                 event.accept(ob);
             }
 

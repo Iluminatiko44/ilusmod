@@ -2,6 +2,8 @@ package io.github.Iluminatiko44.ilusmod.datagen;
 
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
+import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
+import io.github.Iluminatiko44.ilusmod.Init.custom.ModFlammableRotatedPillarBlock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -11,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -91,11 +94,13 @@ public class ModTagsProvider{
         @SuppressWarnings("ConstantConditions")
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
-            for (RegistryObject<Item> bItem : BlockInit.LOG_ITEMS) {
-                ResourceKey<Item> key = bItem.getKey();
-                this.tag(HAPPY_LOGS).add(key);
-                this.tag(ItemTags.LOGS).add(key);
-                this.tag(ItemTags.LOGS_THAT_BURN).add(key);
+            for (RegistryObject<Item> Item : ItemInit.ITEMS.getEntries()) {
+                ResourceKey<Item> key = Item.getKey();
+                if (Item.get() instanceof BlockItem && ((BlockItem) Item.get()).getBlock() instanceof ModFlammableRotatedPillarBlock) {
+                    this.tag(HAPPY_LOGS).add(key);
+                    this.tag(ItemTags.LOGS).add(key);
+                    this.tag(ItemTags.LOGS_THAT_BURN).add(key);
+            }
             }
         }
     }

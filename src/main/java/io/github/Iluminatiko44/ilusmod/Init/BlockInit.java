@@ -26,23 +26,6 @@ public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Ilusmod.MODID);
 
-    public static List<RegistryObject<Block>> ILUSBLOCKS = new ArrayList<>();/*List.of(
-            HAPPY_BLOCK, // 0
-            HAPPY_ORE, // 1
-            DEEPSLATE_HAPPY_ORE, // 2
-            ENDSTONE_HAPPY_ORE, // 3
-            NETHERRACK_HAPPY_ORE, // 4
-            PSEUDO_ICE, // 5
-            HAPPY_LOG, // 6
-            HAPPY_WOOD, // 7
-            STRIPPED_HAPPY_LOG, // 8
-            STRIPPED_HAPPY_WOOD, // 9
-            HAPPY_PLANKS, // 10
-            HAPPY_LEAVES, // 11
-            HAPPY_SAPLING // 12
-    );*/
-    public static List<RegistryObject<Item>> BlockItems = new ArrayList<>();
-
     public static final RegistryObject<Block> HAPPY_BLOCK = register("happy_block",
             () -> new Block(Block.Properties.of(Material.CLAY).strength(1.5f, 10.0f).requiresCorrectToolForDrops()),
                   new Item.Properties());
@@ -98,21 +81,26 @@ public class BlockInit {
                     Block.Properties.copy(Blocks.OAK_SAPLING)),
             new Item.Properties());
 
+    public static final List<RegistryObject<Block> > ORES = new ArrayList<>();
+    public static final List<RegistryObject<Block> > LOGS = new ArrayList<>();
 
-    public static final List<RegistryObject<Block> > ORES = ILUSBLOCKS.subList(1, 5);
-    @SuppressWarnings("unused")
-    public static final List<RegistryObject<Block> > WOODEN = ILUSBLOCKS.subList(6, 11);
-    public static final List<RegistryObject<Block> > LOGS = ILUSBLOCKS.subList(6, 10);
-    public static final List<RegistryObject<Item> > LOG_ITEMS = BlockItems.subList(6, 10);
+    public BlockInit() {
+        ORES.add(HAPPY_ORE);
+        ORES.add(DEEPSLATE_HAPPY_ORE);
+        ORES.add(ENDSTONE_HAPPY_ORE);
+        ORES.add(NETHERRACK_HAPPY_ORE);
+        LOGS.add(HAPPY_LOG);
+        LOGS.add(STRIPPED_HAPPY_LOG);
+        LOGS.add(HAPPY_WOOD);
+        LOGS.add(STRIPPED_HAPPY_WOOD);
 
+    }
     // A supplier for making the item block easier
     private static RegistryObject<Block> register(String name, Supplier<Block> supplier, Item.Properties properties) {
         // Register the block
         RegistryObject<Block> block = BLOCKS.register(name, supplier);
-        ILUSBLOCKS.add(block);
-        // Register the item block in own class ItemInit
-        RegistryObject<Item> blockItem = ItemInit.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
-        BlockItems.add(blockItem);
+        // Register the block with its own item as a separate class for later use
+        ItemInit.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
         return block;
     }
 

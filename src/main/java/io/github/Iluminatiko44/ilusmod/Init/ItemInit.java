@@ -9,19 +9,20 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.List;
+import java.util.function.Supplier;
 
 public class ItemInit {
+
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Ilusmod.MODID);
 
     // Values for normal items to happy item: brightness+20, saturation = 0
-    public static final RegistryObject<Item> HAPPY_BALL = ITEMS.register("happy_ball", () -> new Item(getProps()));
+    public static final RegistryObject<Item> HAPPY_BALL = register("happy_ball");
 
-    public static final RegistryObject<Item> HAPPY_INGOT = ITEMS.register("happy_ingot", () -> new Item(getProps()));
+    public static final RegistryObject<Item> HAPPY_INGOT = register("happy_ingot");
 
-    public static final RegistryObject<Item> GRAPES = ITEMS.register("grapes", () -> new Item(getProps().food(Foods.GRAPES)));
+    public static final RegistryObject<Item> GRAPES = register("grapes", () -> new Item(getProps().food(Foods.GRAPES)));
 
-    public static final RegistryObject<Item> POMMES = ITEMS.register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
+    public static final RegistryObject<Item> POMMES = register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
 
     public static class Foods {
         public static final FoodProperties GRAPES = new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().fast().build();
@@ -41,17 +42,12 @@ public class ItemInit {
 
     public static final RegistryObject<HoeItem> HAPPY_HOE = ITEMS.register("happy_hoe", () -> new HoeItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
 
-    public static final List<RegistryObject<? extends Item>> ILUSITEMS = List.of(
-            HAPPY_BALL,
-            HAPPY_INGOT,
-            GRAPES,
-            POMMES,
-            HAPPY_SWORD,
-            HAPPY_PICKAXE,
-            HAPPY_AXE,
-            HAPPY_SHOVEL,
-            HAPPY_HOE
-    );
+    private static RegistryObject<Item> register(String name, Supplier<Item> supplier) {
+        return ITEMS.register(name, supplier);
+    }
+    private static RegistryObject<Item> register(String name) {
+        return register(name, () -> new Item(getProps()));
+    }
 
     public static Item.Properties getProps() {
         return new Item.Properties();
