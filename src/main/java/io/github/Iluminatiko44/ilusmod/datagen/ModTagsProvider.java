@@ -1,5 +1,6 @@
 package io.github.Iluminatiko44.ilusmod.datagen;
 
+import com.mojang.logging.LogUtils;
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
@@ -13,13 +14,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -42,6 +46,10 @@ public class ModTagsProvider{
                 this.tag(BlockTags.MINEABLE_WITH_AXE).add(key);
                 this.tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(key);
             }
+            // Mineable Tags
+            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                    BlockInit.PSEUDO_ICE.getKey()
+            );
             for(RegistryObject<Block> ore : BlockInit.ORES) {
                 ResourceKey<Block> key = ore.getKey();
                 this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(key);
@@ -58,10 +66,6 @@ public class ModTagsProvider{
             // Leaves Tag
             this.tag(BlockTags.LEAVES).add(
                     BlockInit.HAPPY_LEAVES.getKey()
-            );
-            // Mineable Tags
-            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                    BlockInit.PSEUDO_ICE.getKey()
             );
             this.tag(BlockTags.ICE).add(
                     BlockInit.PSEUDO_ICE.getKey()
@@ -85,8 +89,9 @@ public class ModTagsProvider{
 
     public static class ItemTagsProvider extends TagsProvider<Item> {
 
+        @SuppressWarnings("unused")
+        private static final Logger LOGGER = LogUtils.getLogger();
         public static final TagKey<Item> HAPPY_LOGS = ItemTags.create(new ResourceLocation(Ilusmod.MODID, "happy_logs"));
-
         protected ItemTagsProvider(PackOutput p_256596_, CompletableFuture<HolderLookup.Provider> p_256513_, ExistingFileHelper fileHelper) {
             super(p_256596_, Registries.ITEM, p_256513_, Ilusmod.MODID, fileHelper);
         }
@@ -94,13 +99,45 @@ public class ModTagsProvider{
         @SuppressWarnings("ConstantConditions")
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
+            // Trys to add a tag to every item
             for (RegistryObject<Item> Item : ItemInit.ITEMS.getEntries()) {
+
                 ResourceKey<Item> key = Item.getKey();
+
+                // adds appropriate tags to every tool
+                if(Item.get() instanceof TieredItem) {
+                    this.tag(Tags.Items.TOOLS).add(key);
+                    String Type = Item.get().getClass().getSimpleName();
+                    switch (Type) {
+                        case "SwordItem" -> this.tag(Tags.Items.TOOLS_SWORDS).add(key);
+                        case "PickaxeItem" -> this.tag(Tags.Items.TOOLS_PICKAXES).add(key);
+                        case "AxeItem" -> this.tag(Tags.Items.TOOLS_AXES).add(key);
+                        case "ShovelItem" -> this.tag(Tags.Items.TOOLS_SHOVELS).add(key);
+                        case "HoeItem" -> this.tag(Tags.Items.TOOLS_HOES).add(key);
+                        default -> throw new IllegalStateException("Unexpected value: " + Type);
+                    }
+                }
+
+                // adds appropriate tags to every log or wood
                 if (Item.get() instanceof BlockItem && ((BlockItem) Item.get()).getBlock() instanceof ModFlammableRotatedPillarBlock) {
                     this.tag(HAPPY_LOGS).add(key);
                     this.tag(ItemTags.LOGS).add(key);
                     this.tag(ItemTags.LOGS_THAT_BURN).add(key);
-            }
+                }
+
+                // Adds the appropriate armor tags
+                if(Item.get() instanceof ArmorItem) {
+                    this.tag(Tags.Items.ARMORS).add(key);
+                    String Slot = ((ArmorItem) Item.get()) .getSlot().getName();
+                    switch (Slot) {
+                        case "head" -> this.tag(Tags.Items.ARMORS_HELMETS).add(key);
+                        case "chest" -> this.tag(Tags.Items.ARMORS_CHESTPLATES).add(key);
+                        case "legs" -> this.tag(Tags.Items.ARMORS_LEGGINGS).add(key);
+                        case "feet" -> this.tag(Tags.Items.ARMORS_BOOTS).add(key);
+                        default -> throw new IllegalStateException("Unexpected value: " + Slot);
+                    }
+                }
+
             }
         }
     }
