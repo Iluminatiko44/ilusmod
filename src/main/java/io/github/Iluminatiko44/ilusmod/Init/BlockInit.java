@@ -81,14 +81,10 @@ public class BlockInit {
                     Block.Properties.copy(Blocks.OAK_SAPLING)),
             new Item.Properties());
 
-    public static final List<RegistryObject<Block> > ORES = new ArrayList<>();
+    public static final List<RegistryObject<Block> > ORES = List.of(HAPPY_ORE, DEEPSLATE_HAPPY_ORE, ENDSTONE_HAPPY_ORE, NETHERRACK_HAPPY_ORE);
     public static final List<RegistryObject<Block> > LOGS = new ArrayList<>();
 
     public BlockInit() {
-        ORES.add(HAPPY_ORE);
-        ORES.add(DEEPSLATE_HAPPY_ORE);
-        ORES.add(ENDSTONE_HAPPY_ORE);
-        ORES.add(NETHERRACK_HAPPY_ORE);
         LOGS.add(HAPPY_LOG);
         LOGS.add(STRIPPED_HAPPY_LOG);
         LOGS.add(HAPPY_WOOD);
