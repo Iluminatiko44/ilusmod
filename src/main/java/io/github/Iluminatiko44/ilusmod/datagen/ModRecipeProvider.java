@@ -6,6 +6,7 @@ import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -49,9 +51,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         shovelWStickBuilding(ItemInit.HAPPY_SHOVEL.get(), ItemInit.HAPPY_INGOT.get(), consumer);
         hoeWStickBuilding(ItemInit.HAPPY_HOE.get(), ItemInit.HAPPY_INGOT.get(), consumer);
 
-        //for(RegistryObject<Block> log : BlockInit.LOGS) {
-            RecipeProvider.planksFromLog(consumer, BlockInit.HAPPY_PLANKS.get(), ModTagsProvider.ItemTagsProvider.HAPPY_LOGS, 4);
-        //}
+        RecipeProvider.planksFromLog(consumer, BlockInit.HAPPY_PLANKS.get(), ModTagsProvider.ItemTagsProvider.HAPPY_LOGS, 4);
+
+        // Happy Armor
+        armorBuilding(ItemInit.HAPPY_HELMET, consumer);
+        armorBuilding(ItemInit.HAPPY_CHESTPLATE, consumer);
+        armorBuilding(ItemInit.HAPPY_LEGGINGS, consumer);
+        armorBuilding(ItemInit.HAPPY_BOOTS, consumer);
     }
 
     // See RecipeProvider.java for more info
@@ -145,4 +151,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     private static void hoeWStickBuilding(ItemLike output, Item material, Consumer<FinishedRecipe> consumer) {
         hoeBuilding(output, material, Items.STICK, consumer);
     }
+
+    @SuppressWarnings("SameParameterValue")
+    private static <T  extends Item> void armorBuilding(RegistryObject<T> output, Consumer<FinishedRecipe> consumer) {
+        String outputSlot;
+        Item material;
+        if(output.get() instanceof ArmorItem) {
+            outputSlot = ((ArmorItem) output.get()) .getSlot().getName();
+            material = ((ArmorItem) output.get()).getMaterial().getRepairIngredient().getItems()[0].getItem();
+            switch (outputSlot) {
+                case "head" -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, output.get()).define('M', material).pattern("MMM").pattern("M M").unlockedBy("has_item", has(material)).save(consumer);
+               case "chest" -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, output.get()).define('M', material).pattern("M M").pattern("MMM").pattern("MMM").unlockedBy("has_item", has(material)).save(consumer);
+                case "legs" -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, output.get()).define('M', material).pattern("MMM").pattern("M M").pattern("M M").unlockedBy("has_item", has(material)).save(consumer);
+                case "feet" -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, output.get()).define('M', material).pattern("M M").pattern("M M").unlockedBy("has_item", has(material)).save(consumer);
+                default -> throw new IllegalStateException("Unexpected value: " + outputSlot);
+            }
+        }
+    }
+
 }

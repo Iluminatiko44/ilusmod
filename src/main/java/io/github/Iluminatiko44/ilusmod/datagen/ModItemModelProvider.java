@@ -24,6 +24,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemInit.GRAPES);
         simpleItem(ItemInit.POMMES);
         simpleItem(ItemInit.HAPPY_INGOT);
+        simpleItem(ItemInit.HAPPY_HELMET);
+        simpleItem(ItemInit.HAPPY_CHESTPLATE);
+        simpleItem(ItemInit.HAPPY_LEGGINGS);
+        simpleItem(ItemInit.HAPPY_BOOTS);
         saplingItem(BlockInit.HAPPY_SAPLING);
         handheldItem(ItemInit.HAPPY_SWORD);
         handheldItem(ItemInit.HAPPY_AXE);
@@ -33,14 +37,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+    private <T extends Item> ItemModelBuilder simpleItem(RegistryObject<T> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                         new ResourceLocation(Ilusmod.MODID, "item/" + item.getId().getPath()));
 
     }
     @SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
-    private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
+    private <T extends Block> ItemModelBuilder saplingItem(RegistryObject<T> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                         new ResourceLocation(Ilusmod.MODID, "block/" + item.getId().getPath()));
