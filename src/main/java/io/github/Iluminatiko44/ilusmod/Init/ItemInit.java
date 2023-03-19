@@ -1,10 +1,16 @@
 package io.github.Iluminatiko44.ilusmod.Init;
 
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
+import io.github.Iluminatiko44.ilusmod.base.ModArmorMaterial;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.ForgeTier;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -32,17 +38,23 @@ public class ItemInit {
     }
 
     // Normal tools from happy items
-    public static final RegistryObject<SwordItem> HAPPY_SWORD = ITEMS.register("happy_sword", () -> new SwordItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
+    public static final RegistryObject<SwordItem> HAPPY_SWORD = ITEMS.register("happy_sword", () -> new SwordItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<PickaxeItem> HAPPY_PICKAXE = ITEMS.register("happy_pickaxe", () -> new PickaxeItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
+    public static final RegistryObject<PickaxeItem> HAPPY_PICKAXE = ITEMS.register("happy_pickaxe", () -> new PickaxeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<AxeItem> HAPPY_AXE = ITEMS.register("happy_axe", () -> new AxeItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
+    public static final RegistryObject<AxeItem> HAPPY_AXE = ITEMS.register("happy_axe", () -> new AxeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<ShovelItem> HAPPY_SHOVEL = ITEMS.register("happy_shovel", () -> new ShovelItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
+    public static final RegistryObject<ShovelItem> HAPPY_SHOVEL = ITEMS.register("happy_shovel", () -> new ShovelItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<HoeItem> HAPPY_HOE = ITEMS.register("happy_hoe", () -> new HoeItem(Tiers.NETHERITE, 3, 2.4f, getProps()));
+    public static final RegistryObject<HoeItem> HAPPY_HOE = ITEMS.register("happy_hoe", () -> new HoeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    private static RegistryObject<Item> register(String name, Supplier<Item> supplier) {
+    // Armor
+    public static final RegistryObject<ArmorItem> HAPPY_HELMET = register("happy_helmet", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.HEAD, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_CHESTPLATE = register("happy_chestplate", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.CHEST, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_LEGGINGS = register("happy_leggings", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.LEGS, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_BOOTS = register("happy_boots", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.FEET, getProps()));
+
+    private static <T extends Item> RegistryObject<T> register(String name, Supplier<T> supplier) {
         return ITEMS.register(name, supplier);
     }
     private static RegistryObject<Item> register(String name) {
@@ -51,5 +63,30 @@ public class ItemInit {
 
     public static Item.Properties getProps() {
         return new Item.Properties();
+    }
+
+    public static final class ArmorTiers {
+        public static final ArmorMaterial HAPPY = new ModArmorMaterial(
+                "happy",
+                1000,
+                new int[]{10, 16, 20, 10},
+                50,
+                SoundEvents.ARMOR_EQUIP_NETHERITE,
+                10.0f,
+                10.0f,
+                () -> Ingredient.of(ItemInit.HAPPY_INGOT.get())
+        );
+    }
+
+    public static class Tiers {
+        public static final Tier HAPPY = new ForgeTier(
+                5,
+                2569,
+                10.0f,
+                10.0f,
+                50,
+                Tags.Blocks.NEEDS_NETHERITE_TOOL,
+                () -> Ingredient.of(ItemInit.HAPPY_INGOT.get())
+        );
     }
 }
