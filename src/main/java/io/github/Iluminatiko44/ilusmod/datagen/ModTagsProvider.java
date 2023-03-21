@@ -14,10 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -39,7 +36,7 @@ public class ModTagsProvider{
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
 
-            for(RegistryObject<Block> log : BlockInit.LOGS) {
+            for(RegistryObject<Block> log : BlockInit.BLOCKS.getEntries().stream() .filter(block -> block.get() instanceof ModFlammableRotatedPillarBlock) .toList()) {
                 ResourceKey<Block> key = log.getKey();
                 this.tag(BlockTags.LOGS).add(key);
                 this.tag(BlockTags.LOGS_THAT_BURN).add(key);
@@ -100,35 +97,32 @@ public class ModTagsProvider{
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
             // Trys to add a tag to every item
-            for (RegistryObject<Item> Item : ItemInit.ITEMS.getEntries()) {
+            for (RegistryObject<Item> ItemResource : ItemInit.ITEMS.getEntries()) {
 
-                ResourceKey<Item> key = Item.getKey();
+                ResourceKey<Item> key = ItemResource.getKey();
+                Item item = ItemResource.get();
 
                 // adds appropriate tags to every tool
-                if(Item.get() instanceof TieredItem) {
+                if(item instanceof TieredItem) {
                     this.tag(Tags.Items.TOOLS).add(key);
-                    String Type = Item.get().getClass().getSimpleName();
-                    switch (Type) {
-                        case "SwordItem" -> this.tag(Tags.Items.TOOLS_SWORDS).add(key);
-                        case "PickaxeItem" -> this.tag(Tags.Items.TOOLS_PICKAXES).add(key);
-                        case "AxeItem" -> this.tag(Tags.Items.TOOLS_AXES).add(key);
-                        case "ShovelItem" -> this.tag(Tags.Items.TOOLS_SHOVELS).add(key);
-                        case "HoeItem" -> this.tag(Tags.Items.TOOLS_HOES).add(key);
-                        default -> throw new IllegalStateException("Unexpected value: " + Type);
-                    }
+                    if(item instanceof SwordItem) this.tag(Tags.Items.TOOLS_SWORDS).add(key);
+                    if(item instanceof PickaxeItem) this.tag(Tags.Items.TOOLS_PICKAXES).add(key);
+                    if(item instanceof AxeItem) this.tag(Tags.Items.TOOLS_AXES).add(key);
+                    if(item instanceof ShovelItem) this.tag(Tags.Items.TOOLS_SHOVELS).add(key);
+                    if(item instanceof HoeItem) this.tag(Tags.Items.TOOLS_HOES).add(key);
                 }
 
                 // adds appropriate tags to every log or wood
-                if (Item.get() instanceof BlockItem && ((BlockItem) Item.get()).getBlock() instanceof ModFlammableRotatedPillarBlock) {
+                if (item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof ModFlammableRotatedPillarBlock) {
                     this.tag(HAPPY_LOGS).add(key);
                     this.tag(ItemTags.LOGS).add(key);
                     this.tag(ItemTags.LOGS_THAT_BURN).add(key);
                 }
 
                 // Adds the appropriate armor tags
-                if(Item.get() instanceof ArmorItem) {
+                if(item instanceof ArmorItem) {
                     this.tag(Tags.Items.ARMORS).add(key);
-                    String Slot = ((ArmorItem) Item.get()) .getSlot().getName();
+                    String Slot = ((ArmorItem) item) .getSlot().getName();
                     switch (Slot) {
                         case "head" -> this.tag(Tags.Items.ARMORS_HELMETS).add(key);
                         case "chest" -> this.tag(Tags.Items.ARMORS_CHESTPLATES).add(key);
