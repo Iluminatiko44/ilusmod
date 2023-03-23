@@ -43,45 +43,34 @@ public class ModTagsProvider{
                 this.tag(BlockTags.MINEABLE_WITH_AXE).add(key);
                 this.tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(key);
             }
-            // Mineable Tags
-            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                    BlockInit.PSEUDO_ICE.getKey()
-            );
-            for(RegistryObject<Block> ore : BlockInit.ORES) {
+            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BlockInit.PSEUDO_ICE.getKey());
+
+            for(RegistryObject<Block> ore : BlockInit.BLOCKS.getEntries().stream() .filter(block -> block.getKey().location().toString().contains("ore")) .toList()) {
                 ResourceKey<Block> key = ore.getKey();
+                this.tag(Tags.Blocks.ORES).add(key);
                 this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(key);
                 this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(key);
             }
-            // Plank Tag
-            this.tag(BlockTags.PLANKS).add(
-                    BlockInit.HAPPY_PLANKS.getKey()
-            );
-            // Sapling Tag
-            this.tag(BlockTags.SAPLINGS).add(
-                    BlockInit.HAPPY_SAPLING.getKey()
-            );
-            // Leaves Tag
-            this.tag(BlockTags.LEAVES).add(
-                    BlockInit.HAPPY_LEAVES.getKey()
-            );
-            this.tag(BlockTags.ICE).add(
-                    BlockInit.PSEUDO_ICE.getKey()
-            );
-            this.tag(BlockTags.FROG_PREFER_JUMP_TO).add(
-                    BlockInit.PSEUDO_ICE.getKey()
-            );
-            this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
-                    BlockInit.HAPPY_BLOCK.getKey()
-            );
+            this.tag(Tags.Blocks.ORE_RATES_DENSE).add(BlockInit.HAPPY_ORE.getKey(), BlockInit.DEEPSLATE_HAPPY_ORE.getKey(), BlockInit.NETHERRACK_HAPPY_ORE.getKey());
+
+            this.tag(Tags.Blocks.ORE_BEARING_GROUND_STONE).add(BlockInit.HAPPY_ORE.getKey());
+            this.tag(Tags.Blocks.ORE_BEARING_GROUND_DEEPSLATE).add(BlockInit.DEEPSLATE_HAPPY_ORE.getKey());
+            this.tag(Tags.Blocks.ORE_BEARING_GROUND_NETHERRACK).add(BlockInit.NETHERRACK_HAPPY_ORE.getKey());
+
+            this.tag(BlockTags.PLANKS).add(BlockInit.HAPPY_PLANKS.getKey());
+            this.tag(BlockTags.SAPLINGS).add(BlockInit.HAPPY_SAPLING.getKey());
+            this.tag(BlockTags.LEAVES).add(BlockInit.HAPPY_LEAVES.getKey());
+
+            this.tag(BlockTags.ICE).add(BlockInit.PSEUDO_ICE.getKey());
+            this.tag(BlockTags.FROG_PREFER_JUMP_TO).add(BlockInit.PSEUDO_ICE.getKey());
+            this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(BlockInit.HAPPY_BLOCK.getKey());
             // Needs ... Tool Tags
-            this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-                    BlockInit.PSEUDO_ICE.getKey()
-            );
-            this.tag(Tags.Blocks.NEEDS_WOOD_TOOL).add(
-                    BlockInit.HAPPY_BLOCK.getKey()
-            );
+            this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(BlockInit.PSEUDO_ICE.getKey());
+            this.tag(Tags.Blocks.NEEDS_WOOD_TOOL).add(BlockInit.HAPPY_BLOCK.getKey());
 
         }
+
+
     }
 
     public static class ItemTagsProvider extends TagsProvider<Item> {
@@ -122,7 +111,7 @@ public class ModTagsProvider{
                 // Adds the appropriate armor tags
                 if(item instanceof ArmorItem) {
                     this.tag(Tags.Items.ARMORS).add(key);
-                    String Slot = ((ArmorItem) item) .getSlot().getName();
+                    String Slot = ((ArmorItem) item) .getType().getSlot().getName();
                     switch (Slot) {
                         case "head" -> this.tag(Tags.Items.ARMORS_HELMETS).add(key);
                         case "chest" -> this.tag(Tags.Items.ARMORS_CHESTPLATES).add(key);
