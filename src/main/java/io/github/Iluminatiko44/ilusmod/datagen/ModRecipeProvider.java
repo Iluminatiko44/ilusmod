@@ -157,7 +157,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         String outputSlot;
         Item material;
         if(output.get() instanceof ArmorItem) {
-            outputSlot = ((ArmorItem) output.get()) .getSlot().getName();
+            outputSlot = ((ArmorItem) output.get()) .getType().getSlot().getName();
             material = ((ArmorItem) output.get()).getMaterial().getRepairIngredient().getItems()[0].getItem();
             switch (outputSlot) {
                 case "head" -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, output.get()).define('M', material).pattern("MMM").pattern("M M").unlockedBy("has_item", has(material)).save(consumer);

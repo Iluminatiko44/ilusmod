@@ -2,7 +2,7 @@ package io.github.Iluminatiko44.ilusmod.base;
 
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
@@ -14,13 +14,13 @@ public record ModArmorMaterial(String name, int durability, int[] protection, in
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 
     @Override
-    public int getDurabilityForSlot(@NotNull EquipmentSlot slot) {
-        return HEALTH_PER_SLOT[slot.getIndex()] * this.durability;
+    public int getDurabilityForType(ArmorItem.Type type) {
+        return HEALTH_PER_SLOT[type.getSlot().getIndex()] * this.durability;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlot slot) {
-        return this.protection[slot.getIndex()];
+    public int getDefenseForType(ArmorItem.Type type) {
+        return this.protection[type.getSlot().getIndex()];
     }
 
     @Override

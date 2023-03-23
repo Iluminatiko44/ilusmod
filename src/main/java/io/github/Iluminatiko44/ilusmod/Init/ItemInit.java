@@ -5,7 +5,6 @@ import io.github.Iluminatiko44.ilusmod.base.ModArmorMaterial;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -49,10 +48,10 @@ public class ItemInit {
     public static final RegistryObject<HoeItem> HAPPY_HOE = ITEMS.register("happy_hoe", () -> new HoeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
     // Armor
-    public static final RegistryObject<ArmorItem> HAPPY_HELMET = register("happy_helmet", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.HEAD, getProps()));
-    public static final RegistryObject<ArmorItem> HAPPY_CHESTPLATE = register("happy_chestplate", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.CHEST, getProps()));
-    public static final RegistryObject<ArmorItem> HAPPY_LEGGINGS = register("happy_leggings", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.LEGS, getProps()));
-    public static final RegistryObject<ArmorItem> HAPPY_BOOTS = register("happy_boots", () -> new ArmorItem(ArmorTiers.HAPPY, EquipmentSlot.FEET, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_HELMET = register("happy_helmet", () -> new ArmorItem(ArmorTiers.HAPPY, ArmorItem.Type.HELMET, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_CHESTPLATE = register("happy_chestplate", () -> new ArmorItem(ArmorTiers.HAPPY, ArmorItem.Type.CHESTPLATE, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_LEGGINGS = register("happy_leggings", () -> new ArmorItem(ArmorTiers.HAPPY, ArmorItem.Type.LEGGINGS, getProps()));
+    public static final RegistryObject<ArmorItem> HAPPY_BOOTS = register("happy_boots", () -> new ArmorItem(ArmorTiers.HAPPY, ArmorItem.Type.BOOTS, getProps()));
 
     private static <T extends Item> RegistryObject<T> register(String name, Supplier<T> supplier) {
         return ITEMS.register(name, supplier);
