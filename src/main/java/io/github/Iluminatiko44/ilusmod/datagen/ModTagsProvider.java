@@ -122,6 +122,8 @@ public class ModTagsProvider{
                 }
 
             }
+
+            this.tag(ItemTags.COALS).add(ItemInit.HAPPY_COAL.getKey());
         }
     }
 

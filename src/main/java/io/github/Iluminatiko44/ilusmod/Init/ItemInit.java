@@ -8,12 +8,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class ItemInit {
@@ -28,6 +30,13 @@ public class ItemInit {
     public static final RegistryObject<Item> GRAPES = register("grapes", () -> new Item(getProps().food(Foods.GRAPES)));
 
     public static final RegistryObject<Item> POMMES = register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
+
+    public static final RegistryObject<Item> HAPPY_COAL = register("happy_coal", () -> new Item(getProps().fireResistant()) {
+        @Override
+        public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+            return 16000;
+        }
+    });
 
     public static class Foods {
         public static final FoodProperties GRAPES = new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().fast().build();

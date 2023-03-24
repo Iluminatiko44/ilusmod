@@ -28,6 +28,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemInit.HAPPY_CHESTPLATE);
         simpleItem(ItemInit.HAPPY_LEGGINGS);
         simpleItem(ItemInit.HAPPY_BOOTS);
+        simpleItem(ItemInit.HAPPY_COAL);
         saplingItem(BlockInit.HAPPY_SAPLING);
         handheldItem(ItemInit.HAPPY_SWORD);
         handheldItem(ItemInit.HAPPY_AXE);
