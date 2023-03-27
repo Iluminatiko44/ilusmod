@@ -35,6 +35,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ItemInit.HAPPY_PICKAXE);
         handheldItem(ItemInit.HAPPY_SHOVEL);
         handheldItem(ItemInit.HAPPY_HOE);
+        handheldItem(ItemInit.MACHINEGUN);
     }
 
     @SuppressWarnings("UnusedReturnValue")
