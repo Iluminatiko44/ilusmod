@@ -5,6 +5,7 @@ import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import io.github.Iluminatiko44.ilusmod.Init.custom.ModFlammableRotatedPillarBlock;
+import io.github.Iluminatiko44.ilusmod.base.IlusItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -78,6 +79,7 @@ public class ModTagsProvider{
         @SuppressWarnings("unused")
         private static final Logger LOGGER = LogUtils.getLogger();
         public static final TagKey<Item> HAPPY_LOGS = ItemTags.create(new ResourceLocation(Ilusmod.MODID, "happy_logs"));
+        public static final TagKey<Item> GUNS = ItemTags.create(new ResourceLocation(Ilusmod.MODID, "guns"));
         protected ItemTagsProvider(PackOutput p_256596_, CompletableFuture<HolderLookup.Provider> p_256513_, ExistingFileHelper fileHelper) {
             super(p_256596_, Registries.ITEM, p_256513_, Ilusmod.MODID, fileHelper);
         }
@@ -90,6 +92,10 @@ public class ModTagsProvider{
 
                 ResourceKey<Item> key = ItemResource.getKey();
                 Item item = ItemResource.get();
+
+                if(item instanceof IlusItem) {
+                    ((IlusItem) item).getTags().forEach(tag -> this.tag(tag).add(key));
+                }
 
                 // adds appropriate tags to every tool
                 if(item instanceof TieredItem) {
