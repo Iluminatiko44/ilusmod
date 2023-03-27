@@ -2,6 +2,8 @@ package io.github.Iluminatiko44.ilusmod.Init;
 
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.base.ModArmorMaterial;
+import io.github.Iluminatiko44.ilusmod.custom.MachineGunItem;
+import io.github.Iluminatiko44.ilusmod.datagen.ModTagsProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -30,6 +32,8 @@ public class ItemInit {
     public static final RegistryObject<Item> GRAPES = register("grapes", () -> new Item(getProps().food(Foods.GRAPES)));
 
     public static final RegistryObject<Item> POMMES = register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
+
+    public static final RegistryObject<Item> MACHINEGUN = register("machinegun", () -> new MachineGunItem(getProps().stacksTo(1), Tags.Items.TOOLS, ModTagsProvider.ItemTagsProvider.GUNS));
 
     public static final RegistryObject<Item> HAPPY_COAL = register("happy_coal", () -> new Item(getProps().fireResistant()) {
         @Override
