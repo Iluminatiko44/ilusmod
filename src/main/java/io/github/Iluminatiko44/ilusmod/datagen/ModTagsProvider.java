@@ -5,7 +5,7 @@ import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import io.github.Iluminatiko44.ilusmod.Init.custom.ModFlammableRotatedPillarBlock;
-import io.github.Iluminatiko44.ilusmod.base.IlusItem;
+import io.github.Iluminatiko44.ilusmod.base.ModItemBase;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -93,8 +93,8 @@ public class ModTagsProvider{
                 ResourceKey<Item> key = ItemResource.getKey();
                 Item item = ItemResource.get();
 
-                if(item instanceof IlusItem) {
-                    ((IlusItem) item).getTags().forEach(tag -> this.tag(tag).add(key));
+                if(item instanceof ModItemBase) {
+                    ((ModItemBase) item).getTags().forEach(tag -> this.tag(tag).add(key));
                 }
 
                 // adds appropriate tags to every tool

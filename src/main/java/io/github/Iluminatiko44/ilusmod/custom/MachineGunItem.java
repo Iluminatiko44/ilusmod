@@ -1,6 +1,6 @@
 package io.github.Iluminatiko44.ilusmod.custom;
 
-import io.github.Iluminatiko44.ilusmod.base.IlusItem;
+import io.github.Iluminatiko44.ilusmod.base.ModItemBase;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class MachineGunItem extends IlusItem {
+public class MachineGunItem extends ModItemBase {
 
     @SafeVarargs
     public MachineGunItem(Properties properties, TagKey<Item>... tags) {
@@ -21,14 +21,16 @@ public class MachineGunItem extends IlusItem {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         if (!level.isClientSide()) {
-            BulletEntity arrow = new BulletEntity(level, player);
+            BulletEntity arrow = new BulletEntity(level, player, 15.0F);
             arrow.setBaseDamage(arrow.getBaseDamage() + 2.0D);
             arrow.setKnockback(0);
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
             arrow.setNoGravity(true);                                           // Offset, Power, Spread
-            arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
+            arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 10.0F, 1.0F);
             level.addFreshEntity(arrow);
         }
         return super.use(level, player, hand);
     }
+
+
 }
