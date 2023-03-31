@@ -10,5 +10,5 @@ public interface ModItemBase {
 
     List<TagKey<Item>> tags = new ArrayList<>();
 
-    List<TagKey<Item>> getTags();
+    default List<TagKey<Item>> getTags() {return this.tags;}
 }

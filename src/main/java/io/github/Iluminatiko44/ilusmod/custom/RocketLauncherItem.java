@@ -12,7 +12,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class RocketLauncherItem extends Item implements ModItemBase {
 
@@ -34,10 +33,5 @@ public class RocketLauncherItem extends Item implements ModItemBase {
             level.addFreshEntity(arrow);
         }
         return super.use(level, player, hand);
-    }
-
-    @Override
-    public List<TagKey<Item>> getTags() {
-        return this.tags;
     }
 }
