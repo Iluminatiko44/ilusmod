@@ -4,20 +4,11 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class ModItemBase extends net.minecraft.world.item.Item {
+public interface ModItemBase {
 
-    private final List<TagKey<Item>> tags = new ArrayList<>();
+    List<TagKey<Item>> tags = new ArrayList<>();
 
-    @SafeVarargs
-    public ModItemBase(Properties properties, TagKey<Item>... tags) {
-        super(properties);
-        this.tags.addAll(Arrays.asList(tags));
-    }
-
-    public List<TagKey<Item>> getTags() {
-        return tags;
-    }
+    List<TagKey<Item>> getTags();
 }
