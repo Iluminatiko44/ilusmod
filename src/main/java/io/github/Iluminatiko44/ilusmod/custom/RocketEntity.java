@@ -7,10 +7,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
 
-public class BulletEntity extends Arrow {
+public class RocketEntity extends Arrow {
     private final float expoRad;
-    public BulletEntity(Level p_36858_, LivingEntity p_36859_, float explosionRadius) {
-        super(p_36858_, p_36859_);
+    public RocketEntity(Level level, LivingEntity owner, float explosionRadius) {
+        super(level, owner);
         this.expoRad = explosionRadius;
     }
 
@@ -27,7 +27,7 @@ public class BulletEntity extends Arrow {
         this.remove(RemovalReason.DISCARDED);
     }
 
-    private static void explode(BulletEntity projectile) {
+    private static void explode(RocketEntity projectile) {
 
         projectile.getLevel().explode(
                 projectile, // the projectile itself, because the explosion shouldn't damage its host. It also gets the owner from this.

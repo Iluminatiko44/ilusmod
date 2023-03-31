@@ -29,7 +29,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("item."+id+".happy_leggings", "Happy Leggings");
         add("item."+id+".happy_boots", "Happy Boots");
         add("item."+id+".happy_coal", "Happy Coal");
-        add("item."+id+".machinegun", "Machinegun");
+        add("item."+id+".rocketlauncher", "Rocket launcher");
 
         add("block."+id+".happy_block", "Happy Block");
         add("block."+id+".happy_ore", "Happy Ore");

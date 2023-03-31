@@ -11,17 +11,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class MachineGunItem extends ModItemBase {
+import java.util.Arrays;
+import java.util.List;
+
+public class RocketLauncherItem extends Item implements ModItemBase {
 
     @SafeVarargs
-    public MachineGunItem(Properties properties, TagKey<Item>... tags) {
-        super(properties, tags);
+    public RocketLauncherItem(Properties properties, TagKey<Item>... tags) {
+        super(properties);
+        this.tags.addAll(Arrays.asList(tags));
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         if (!level.isClientSide()) {
-            BulletEntity arrow = new BulletEntity(level, player, 15.0F);
+            RocketEntity arrow = new RocketEntity(level, player, 15.0F);
             arrow.setBaseDamage(arrow.getBaseDamage() + 2.0D);
             arrow.setKnockback(0);
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
@@ -32,5 +36,8 @@ public class MachineGunItem extends ModItemBase {
         return super.use(level, player, hand);
     }
 
-
+    @Override
+    public List<TagKey<Item>> getTags() {
+        return this.tags;
+    }
 }
