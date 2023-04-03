@@ -33,7 +33,7 @@ public class ItemInit {
 
     public static final RegistryObject<Item> POMMES = register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
 
-    public static final RegistryObject<Item> MACHINEGUN = register("rocketlauncher", () -> new RocketLauncherItem(getProps().stacksTo(1), Tags.Items.TOOLS, ModTagsProvider.ItemTagsProvider.GUNS));
+    public static final RegistryObject<Item> ROCKET_LAUNCHER = register("rocket_launcher", () -> new RocketLauncherItem(getProps().stacksTo(1), Tags.Items.TOOLS, ModTagsProvider.ItemTagsProvider.GUNS));
 
     public static final RegistryObject<Item> HAPPY_COAL = register("happy_coal", () -> new Item(getProps().fireResistant()) {
         @Override
@@ -50,15 +50,15 @@ public class ItemInit {
     }
 
     // Normal tools from happy items
-    public static final RegistryObject<SwordItem> HAPPY_SWORD = ITEMS.register("happy_sword", () -> new SwordItem(Tiers.HAPPY, 3, 2.4f, getProps()));
+    public static final RegistryObject<SwordItem> HAPPY_SWORD = register("happy_sword", () -> new SwordItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<PickaxeItem> HAPPY_PICKAXE = ITEMS.register("happy_pickaxe", () -> new PickaxeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
+    public static final RegistryObject<PickaxeItem> HAPPY_PICKAXE = register("happy_pickaxe", () -> new PickaxeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<AxeItem> HAPPY_AXE = ITEMS.register("happy_axe", () -> new AxeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
+    public static final RegistryObject<AxeItem> HAPPY_AXE = register("happy_axe", () -> new AxeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<ShovelItem> HAPPY_SHOVEL = ITEMS.register("happy_shovel", () -> new ShovelItem(Tiers.HAPPY, 3, 2.4f, getProps()));
+    public static final RegistryObject<ShovelItem> HAPPY_SHOVEL = register("happy_shovel", () -> new ShovelItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
-    public static final RegistryObject<HoeItem> HAPPY_HOE = ITEMS.register("happy_hoe", () -> new HoeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
+    public static final RegistryObject<HoeItem> HAPPY_HOE = register("happy_hoe", () -> new HoeItem(Tiers.HAPPY, 3, 2.4f, getProps()));
 
     // Armor
     public static final RegistryObject<ArmorItem> HAPPY_HELMET = register("happy_helmet", () -> new ArmorItem(ArmorTiers.HAPPY, ArmorItem.Type.HELMET, getProps()));
