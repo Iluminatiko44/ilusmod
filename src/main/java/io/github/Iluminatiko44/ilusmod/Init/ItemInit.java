@@ -2,7 +2,7 @@ package io.github.Iluminatiko44.ilusmod.Init;
 
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.base.ModArmorMaterial;
-import io.github.Iluminatiko44.ilusmod.custom.RocketLauncherItem;
+import io.github.Iluminatiko44.ilusmod.custom.rockets.RocketLauncherItem;
 import io.github.Iluminatiko44.ilusmod.datagen.ModTagsProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
