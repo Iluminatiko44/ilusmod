@@ -3,10 +3,9 @@ package io.github.Iluminatiko44.ilusmod;
 import com.mojang.logging.LogUtils;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
 import io.github.Iluminatiko44.ilusmod.Init.CreativeTabsInit;
+import io.github.Iluminatiko44.ilusmod.Init.EntityInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,12 +17,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
-
-import java.util.Collection;
 
 @Mod(Ilusmod.MODID)
 public class Ilusmod
@@ -32,10 +27,6 @@ public class Ilusmod
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-
     public Ilusmod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -43,17 +34,15 @@ public class Ilusmod
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Item Initializer
+        // Register the Initializers
         BlockInit.BLOCKS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
-
-        BLOCKS.register(modEventBus);
-        ITEMS.register(modEventBus);
+        EntityInit.ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        // Register the item to a creative tab
+        // Register the items to a creative tab
         modEventBus.addListener(this::addCreative);
     }
 
@@ -67,15 +56,9 @@ public class Ilusmod
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == CreativeTabsInit.ILUSTAB) {
-            Collection<RegistryObject<Block> > block =  BlockInit.BLOCKS.getEntries();
-            for(RegistryObject<Block> ob : block) {
-                event.accept(ob);
-            }
-            Collection< RegistryObject<Item> > items =  ItemInit.ITEMS.getEntries();
-            for(RegistryObject<Item> ob : items) {
-                event.accept(ob);
-            }
-
+            // These lambdas are like a for-loops. They are basically doing forEach{ob -> event.accept(ob)}
+            BlockInit.BLOCKS.getEntries().forEach(event::accept);
+            ItemInit.ITEMS.getEntries().forEach(event::accept);
         }
     }
 
