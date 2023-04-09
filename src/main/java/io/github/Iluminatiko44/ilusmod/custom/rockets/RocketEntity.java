@@ -1,12 +1,17 @@
 package io.github.Iluminatiko44.ilusmod.custom.rockets;
 
 import com.mojang.logging.LogUtils;
+import io.github.Iluminatiko44.ilusmod.Init.EntityInit;
+import io.github.Iluminatiko44.ilusmod.base.ModTagsBase;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -14,22 +19,25 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
-public class RocketEntity extends Arrow {
+import java.util.List;
+
+public abstract class RocketEntity extends Projectile implements ModTagsBase {
     private static final Logger LOGGER = LogUtils.getLogger();
+    private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BYTE);
     private final double acceleration;
     private final float expoRad;
-    public RocketEntity(EntityType<? extends RocketEntity> p_37411_, Level p_37412_) {
-        super(p_37411_, p_37412_);
-        this.setNoGravity(true);
-        this.pickup = AbstractArrow.Pickup.DISALLOWED;
-        this.acceleration = 1.2D;
-        this.expoRad = 15.0F;
+    private boolean inGround;
+    @SafeVarargs
+    public RocketEntity(EntityType<? extends RocketEntity> p_37411_, Level p_37412_, TagKey<? extends EntityType<?>>... tags) {
+        this(p_37411_, p_37412_, null, 0.0F, 1.0D);
+
+        this.setTagKeys(List.of(tags));
     }
-    public RocketEntity(Level level, LivingEntity owner, float explosionRadius, double acceleration) {
-        super(level, owner);
-        this.expoRad = explosionRadius;
+    public RocketEntity(EntityType<? extends RocketEntity>entityType, Level level, LivingEntity owner, float explosionRadius, double acceleration) {
+        super(entityType,level);
+        this.setOwner(owner);
         this.setNoGravity(true);
-        this.pickup = AbstractArrow.Pickup.DISALLOWED;
+        this.expoRad = explosionRadius;
         this.acceleration = acceleration;
     }
 
@@ -37,7 +45,8 @@ public class RocketEntity extends Arrow {
     protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
         explode(this);
         super.onHitBlock(blockHitResult);
-        this.remove(RemovalReason.DISCARDED);
+        inGround = true;
+        this.discard();
     }
     @Override
     public void onHitEntity(@NotNull EntityHitResult entityHitResult) {
@@ -87,10 +96,37 @@ public class RocketEntity extends Arrow {
     public float getExplosionRadius() {
         return expoRad;
     }
+    @Override
+    protected void defineSynchedData() {
+        this.entityData.define(ID_FLAGS, (byte)0);
+    }
 
-    public static class NukeEntity extends RocketEntity {
-        public NukeEntity(EntityType<? extends RocketEntity> p_37411_, Level p_37412_) {
-            super(p_37411_, p_37412_);
+    public static class Rocket extends RocketEntity {
+        @SafeVarargs
+        public Rocket(EntityType<? extends RocketEntity> entityType, Level level, TagKey<EntityType<?>>... tags) {
+            super(entityType, level, tags);
+        }
+        public Rocket(Level level, LivingEntity owner) {
+            super(EntityInit.ROCKET.get(), level, owner, 7.0F, 1.2D);
+        }
+    }
+    public static class ExplosiveRocket extends RocketEntity {
+        public ExplosiveRocket(Level level, LivingEntity owner) {
+            super(EntityInit.EXPLOSIVE_ROCKET.get(), level, owner, 10.0F, 1.1D);
+        }
+        @SafeVarargs
+        public ExplosiveRocket(EntityType<? extends RocketEntity> entityType, Level level, TagKey<EntityType<?>>... tags) {
+            super(entityType, level, tags);
+        }
+
+    }
+    public static class Nuke extends RocketEntity {
+        @SafeVarargs
+        public Nuke(EntityType<? extends RocketEntity> entityType, Level level, TagKey<EntityType<?>>... tags) {
+            super(entityType, level, tags);
+        }
+        public Nuke(Level level, LivingEntity owner) {
+            super(EntityInit.NUKE_ROCKET.get(), level, owner, 25.0F, 1.01D);
         }
     }
 
