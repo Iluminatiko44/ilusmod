@@ -34,7 +34,9 @@ public class ItemInit {
     public static final RegistryObject<Item> POMMES = register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
 
     public static final RegistryObject<Item> ROCKET_LAUNCHER = register("rocket_launcher", () -> new RocketLauncherItem(getProps().stacksTo(1), Tags.Items.TOOLS, ModTagsProvider.ItemTagsProvider.GUNS));
-
+    public static final RegistryObject<Item> ROCKET = register("rocket", () -> new Item(getProps().stacksTo(64)));
+    public static final RegistryObject<Item> NUCLEAR_ROCKET = register("nuclear_rocket", () -> new Item(getProps().stacksTo(1)));
+    public static final RegistryObject<Item> EXPLOSIVE_ROCKET = register("explosive_rocket", () -> new Item(getProps().stacksTo(1)));
     public static final RegistryObject<Item> HAPPY_COAL = register("happy_coal", () -> new Item(getProps().fireResistant()) {
         @Override
         public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
