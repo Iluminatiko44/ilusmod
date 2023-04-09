@@ -46,6 +46,9 @@ public record ModArmorMaterial(String name, int durability, int[] protection, in
     public @NotNull String getName() {
         return Ilusmod.MODID + ":" + this.name;
     }
+    public @NotNull String getSimpleName() {
+        return this.name;
+    }
 
     @Override
     public float getToughness() {

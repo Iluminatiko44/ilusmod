@@ -19,7 +19,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class BlockInit {
@@ -69,8 +68,6 @@ public class BlockInit {
                     new HappyTreeGrower(),
                     Block.Properties.copy(Blocks.OAK_SAPLING)));
 
-    public static final List<RegistryObject<Block> > ORES = List.of(HAPPY_ORE, DEEPSLATE_HAPPY_ORE, ENDSTONE_HAPPY_ORE, NETHERRACK_HAPPY_ORE);
-    
     // A supplier for making the item block easier
     private static RegistryObject<Block> register(String name, Supplier<Block> supplier, Item.Properties properties) {
         // Register the block

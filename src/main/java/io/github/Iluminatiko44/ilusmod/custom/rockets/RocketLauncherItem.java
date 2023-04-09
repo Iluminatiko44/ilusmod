@@ -46,7 +46,7 @@ public class RocketLauncherItem extends ProjectileWeaponItem implements ModTagsB
 
     @Override
     public @NotNull Predicate<ItemStack> getAllSupportedProjectiles() {
-        return itemStack -> itemStack.is(ModTagsProvider.ItemTagsProvider.ROCKETS); // TODO: Add the rocket items and tags
+        return itemStack -> itemStack.is(ModTagsProvider.ItemTagsProvider.ROCKETS);
     }
 
     @Override

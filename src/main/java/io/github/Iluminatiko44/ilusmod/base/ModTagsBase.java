@@ -2,7 +2,6 @@ package io.github.Iluminatiko44.ilusmod.base;
 
 import net.minecraft.tags.TagKey;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 /**
