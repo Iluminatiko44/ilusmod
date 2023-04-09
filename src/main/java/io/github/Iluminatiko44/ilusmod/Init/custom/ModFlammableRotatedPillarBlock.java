@@ -1,20 +1,27 @@
 package io.github.Iluminatiko44.ilusmod.Init.custom;
 
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
+import io.github.Iluminatiko44.ilusmod.base.ModTagsBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 import org.jetbrains.annotations.Nullable;
 
-public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
+import java.util.List;
 
-    public ModFlammableRotatedPillarBlock(Properties properties) {
+public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock implements ModTagsBase {
+
+    @SafeVarargs
+    public ModFlammableRotatedPillarBlock(Properties properties, TagKey<Block>... tags) {
         super(properties);
+        this.setTagKeys(List.of(tags));
     }
 
     @Override

@@ -3,9 +3,10 @@ package io.github.Iluminatiko44.ilusmod.datagen;
 import com.mojang.logging.LogUtils;
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.Init.BlockInit;
+import io.github.Iluminatiko44.ilusmod.Init.EntityInit;
 import io.github.Iluminatiko44.ilusmod.Init.ItemInit;
 import io.github.Iluminatiko44.ilusmod.Init.custom.ModFlammableRotatedPillarBlock;
-import io.github.Iluminatiko44.ilusmod.base.ModItemBase;
+import io.github.Iluminatiko44.ilusmod.base.ModTagsBase;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -15,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -29,21 +31,19 @@ public class ModTagsProvider{
 
     public static class BlockTagsProvider extends TagsProvider<Block> {
 
-        protected BlockTagsProvider(PackOutput p_256596_, CompletableFuture<HolderLookup.Provider> p_256513_, ExistingFileHelper fileHelper) {
-            super(p_256596_, Registries.BLOCK, p_256513_, Ilusmod.MODID, fileHelper);
+        protected BlockTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper fileHelper) {
+            super(packOutput, Registries.BLOCK, completableFuture, Ilusmod.MODID, fileHelper);
         }
 
-        @SuppressWarnings("ConstantConditions")
+        @SuppressWarnings({"ConstantConditions", "unchecked"})
         @Override
-        protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
-
-            for(RegistryObject<Block> log : BlockInit.BLOCKS.getEntries().stream() .filter(block -> block.get() instanceof ModFlammableRotatedPillarBlock) .toList()) {
-                ResourceKey<Block> key = log.getKey();
-                this.tag(BlockTags.LOGS).add(key);
-                this.tag(BlockTags.LOGS_THAT_BURN).add(key);
-                this.tag(BlockTags.MINEABLE_WITH_AXE).add(key);
-                this.tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(key);
-            }
+        protected void addTags(HolderLookup.@NotNull Provider holderProvider) {
+            BlockInit.BLOCKS.getEntries().forEach(block -> {
+                ResourceKey<Block> key = block.getKey();
+                if(block.get() instanceof ModTagsBase) {
+                    ((ModTagsBase) block.get()).getTagKeys().forEach(tag -> {System.out.println(block.get() + tag.toString()); this.tag((TagKey<Block>) tag).add(key);});
+                }
+            });
             this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BlockInit.PSEUDO_ICE.getKey());
 
             for(RegistryObject<Block> ore : BlockInit.BLOCKS.getEntries().stream() .filter(block -> block.getKey().location().toString().contains("ore")) .toList()) {
@@ -80,11 +80,12 @@ public class ModTagsProvider{
         private static final Logger LOGGER = LogUtils.getLogger();
         public static final TagKey<Item> HAPPY_LOGS = ItemTags.create(new ResourceLocation(Ilusmod.MODID, "happy_logs"));
         public static final TagKey<Item> GUNS = ItemTags.create(new ResourceLocation(Ilusmod.MODID, "guns"));
+        public static final TagKey<Item> ROCKETS = ItemTags.create(new ResourceLocation(Ilusmod.MODID, "rockets"));
         protected ItemTagsProvider(PackOutput p_256596_, CompletableFuture<HolderLookup.Provider> p_256513_, ExistingFileHelper fileHelper) {
             super(p_256596_, Registries.ITEM, p_256513_, Ilusmod.MODID, fileHelper);
         }
 
-        @SuppressWarnings("ConstantConditions")
+        @SuppressWarnings({"ConstantConditions", "unchecked"})
         @Override
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
             // Trys to add a tag to every item
@@ -93,18 +94,18 @@ public class ModTagsProvider{
                 ResourceKey<Item> key = ItemResource.getKey();
                 Item item = ItemResource.get();
 
-                if(item instanceof ModItemBase) {
-                    ((ModItemBase) item).getTags().forEach(tag -> this.tag(tag).add(key));
+                if(item instanceof ModTagsBase) {
+                    ((ModTagsBase) item).getTagKeys().forEach(tag -> this.tag((TagKey<Item>) tag).add(key));
                 }
 
                 // adds appropriate tags to every tool
                 if(item instanceof TieredItem) {
                     this.tag(Tags.Items.TOOLS).add(key);
-                    if(item instanceof SwordItem) this.tag(Tags.Items.TOOLS_SWORDS).add(key);
-                    if(item instanceof PickaxeItem) this.tag(Tags.Items.TOOLS_PICKAXES).add(key);
-                    if(item instanceof AxeItem) this.tag(Tags.Items.TOOLS_AXES).add(key);
-                    if(item instanceof ShovelItem) this.tag(Tags.Items.TOOLS_SHOVELS).add(key);
-                    if(item instanceof HoeItem) this.tag(Tags.Items.TOOLS_HOES).add(key);
+                    if(item instanceof SwordItem) this.tag(ItemTags.SWORDS).add(key);
+                    if(item instanceof PickaxeItem) this.tag(ItemTags.PICKAXES).add(key);
+                    if(item instanceof AxeItem) this.tag(ItemTags.AXES).add(key);
+                    if(item instanceof ShovelItem) this.tag(ItemTags.SHOVELS).add(key);
+                    if(item instanceof HoeItem) this.tag(ItemTags.HOES).add(key);
                 }
 
                 // adds appropriate tags to every log or wood
@@ -130,6 +131,31 @@ public class ModTagsProvider{
             }
 
             this.tag(ItemTags.COALS).add(ItemInit.HAPPY_COAL.getKey());
+        }
+    }
+
+    public static class EntityTypeTagsProvider extends TagsProvider<EntityType<?>> {
+
+        public EntityTypeTagsProvider(PackOutput p_256596_, CompletableFuture<HolderLookup.Provider> p_256513_, ExistingFileHelper fileHelper) {
+            super(p_256596_, Registries.ENTITY_TYPE, p_256513_, Ilusmod.MODID, fileHelper);
+        }
+        public static TagKey<EntityType<?>> ROCKETS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Ilusmod.MODID, "rockets"));
+        @Override
+        @SuppressWarnings("unchecked") // This is thrown because of line 160, where we cast "tag" to TagKey<EntityType<?>>.
+        protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
+
+            EntityInit.ENTITY_TYPES.getEntries().forEach(entity -> {
+                ResourceKey<EntityType<?>> key = entity.getKey();
+                assert key != null;
+                EntityType<?> type = entity.get();
+                if(type instanceof ModTagsBase) {
+                    ((ModTagsBase) type).getTagKeys().forEach(
+                            // We are allowed to cast here, because we are only getting the tag keys from Entity_Types, which are all type of EntityType<?>.
+                        tag ->  this.tag((TagKey<EntityType<?>>)tag).add(key)
+                    );
+                }
+            });
+
         }
     }
 
