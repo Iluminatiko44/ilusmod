@@ -20,7 +20,7 @@ public abstract class AbstractRocketRenderer<T extends AbstractRocket> extends E
     protected AbstractRocketRenderer(EntityRendererProvider.Context context, ResourceLocation location) {
         super(context);
         ROCKET_LOCATION = location;
-        this.model = new RocketModel<T>(context.bakeLayer(RocketModel.LAYER_LOCATION));
+        this.model = new RocketModel<>(context.bakeLayer(RocketModel.LAYER_LOCATION));
     }
 
 
