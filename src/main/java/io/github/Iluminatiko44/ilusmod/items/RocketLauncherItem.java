@@ -1,7 +1,9 @@
-package io.github.Iluminatiko44.ilusmod.custom.rockets;
+package io.github.Iluminatiko44.ilusmod.items;
 
+import com.mojang.logging.LogUtils;
 import io.github.Iluminatiko44.ilusmod.base.ModTagsBase;
 import io.github.Iluminatiko44.ilusmod.datagen.ModTagsProvider;
+import io.github.Iluminatiko44.ilusmod.entities.AbstractRocket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
@@ -13,12 +15,13 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 public class RocketLauncherItem extends ProjectileWeaponItem implements ModTagsBase {
-
+    private static final Logger LOGGER = LogUtils.getLogger();
     @SafeVarargs
     public RocketLauncherItem(Properties properties, TagKey<Item>... tags) {
         super(properties);
@@ -31,10 +34,13 @@ public class RocketLauncherItem extends ProjectileWeaponItem implements ModTagsB
         boolean hasNoAmmo = player.getProjectile(itemstack).isEmpty();
 
         if (!level.isClientSide()) {
-
-            RocketEntity rocket = new RocketEntity.Nuke(level, player);
+            //LOGGER.debug("RocketLauncherItem.use() on Client called");
+            AbstractRocket rocket = new AbstractRocket.Nuke(level, player);
+            //LOGGER.debug("New Nuke declared");
             rocket.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.0F, 1.0F);
+            //LOGGER.debug("Nuke shot");
             level.addFreshEntity(rocket);
+            //LOGGER.debug("Nuke added to level");
         }
         return super.use(level, player, hand);
     }
