@@ -134,27 +134,18 @@ public class ModTagsProvider{
         }
     }
 
-    public static class EntityTypeTagsProvider extends TagsProvider<EntityType<?>> {
+    public static class EntityTypeTagsProvider extends net.minecraft.data.tags.EntityTypeTagsProvider {
 
-        public EntityTypeTagsProvider(PackOutput p_256596_, CompletableFuture<HolderLookup.Provider> p_256513_, ExistingFileHelper fileHelper) {
-            super(p_256596_, Registries.ENTITY_TYPE, p_256513_, Ilusmod.MODID, fileHelper);
+        public EntityTypeTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper fileHelper) {
+            super(packOutput, completableFuture, Ilusmod.MODID, fileHelper);
         }
-        public static TagKey<EntityType<?>> ROCKETS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Ilusmod.MODID, "rockets"));
+        public static final TagKey<EntityType<?>> ROCKETS = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(Ilusmod.MODID, "rockets"));
+
         @Override
-        @SuppressWarnings("unchecked") // This is thrown because of line 160, where we cast "tag" to TagKey<EntityType<?>>.
+        //@SuppressWarnings("unchecked") // This is thrown because of line 155, where we cast "tag" to TagKey<EntityType<?>>.
         protected void addTags(HolderLookup.@NotNull Provider p_256380_) {
 
-            EntityInit.ENTITY_TYPES.getEntries().forEach(entity -> {
-                ResourceKey<EntityType<?>> key = entity.getKey();
-                assert key != null;
-                EntityType<?> type = entity.get();
-                if(type instanceof ModTagsBase) {
-                    ((ModTagsBase) type).getTagKeys().forEach(
-                            // We are allowed to cast here, because we are only getting the tag keys from Entity_Types, which are all type of EntityType<?>.
-                        tag ->  this.tag((TagKey<EntityType<?>>)tag).add(key)
-                    );
-                }
-            });
+            this.tag(ROCKETS).add(EntityInit.ROCKET.get(), EntityInit.NUKE.get(), EntityInit.EXPLOSIVE_ROCKET.get());
 
         }
     }

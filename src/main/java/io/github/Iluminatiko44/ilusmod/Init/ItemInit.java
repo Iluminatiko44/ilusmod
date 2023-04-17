@@ -2,7 +2,8 @@ package io.github.Iluminatiko44.ilusmod.Init;
 
 import io.github.Iluminatiko44.ilusmod.Ilusmod;
 import io.github.Iluminatiko44.ilusmod.base.ModArmorMaterial;
-import io.github.Iluminatiko44.ilusmod.custom.rockets.RocketLauncherItem;
+import io.github.Iluminatiko44.ilusmod.base.ModItem;
+import io.github.Iluminatiko44.ilusmod.items.RocketLauncherItem;
 import io.github.Iluminatiko44.ilusmod.datagen.ModTagsProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -34,10 +35,10 @@ public class ItemInit {
     public static final RegistryObject<Item> POMMES = register("pommes", () -> new Item(getProps().food(Foods.POMMES)));
 
     public static final RegistryObject<Item> ROCKET_LAUNCHER = register("rocket_launcher", () -> new RocketLauncherItem(getProps().stacksTo(1), Tags.Items.TOOLS, ModTagsProvider.ItemTagsProvider.GUNS));
-    public static final RegistryObject<Item> ROCKET = register("rocket", () -> new Item(getProps().stacksTo(64)));
-    public static final RegistryObject<Item> NUCLEAR_ROCKET = register("nuclear_rocket", () -> new Item(getProps().stacksTo(1)));
-    public static final RegistryObject<Item> EXPLOSIVE_ROCKET = register("explosive_rocket", () -> new Item(getProps().stacksTo(1)));
-    public static final RegistryObject<Item> HAPPY_COAL = register("happy_coal", () -> new Item(getProps().fireResistant()) {
+    public static final RegistryObject<Item> ROCKET = register("rocket", () -> new ModItem(getProps().stacksTo(64), ModTagsProvider.ItemTagsProvider.ROCKETS));
+    public static final RegistryObject<Item> NUCLEAR_ROCKET = register("nuclear_rocket", () -> new ModItem(getProps().stacksTo(1), ModTagsProvider.ItemTagsProvider.ROCKETS));
+    public static final RegistryObject<Item> EXPLOSIVE_ROCKET = register("explosive_rocket", () -> new ModItem(getProps().stacksTo(1), ModTagsProvider.ItemTagsProvider.ROCKETS));
+    public static final RegistryObject<Item> HAPPY_COAL = register("happy_coal", () -> new ModItem(getProps().fireResistant()) {
         @Override
         public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
             return 16000;

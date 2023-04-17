@@ -30,6 +30,7 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(output, lookupProvider));
         generator.addProvider(true, new ModTagsProvider.BlockTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(true, new ModTagsProvider.ItemTagsProvider(output, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new ModTagsProvider.EntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
     }
 
 }
