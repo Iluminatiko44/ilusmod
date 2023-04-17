@@ -45,6 +45,10 @@ public class ModLanguageProvider extends LanguageProvider {
         add("block."+id+".happy_sapling", "Happy Sapling");
         add("block."+id+".happy_planks", "Happy Planks");
 
+        add("entity."+id+".rocket", "Rocket");
+        add("entity."+id+".nuclear_rocket", "Nuke");
+        add("entity."+id+".explosive_rocket", "Explosive Rocket");
+
         add("creativemodetab."+id+"_tab", "Ilusmod");
     }
 }
