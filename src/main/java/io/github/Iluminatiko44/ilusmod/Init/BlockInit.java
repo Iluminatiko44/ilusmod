@@ -42,13 +42,17 @@ public class BlockInit {
 
     // The difference between a log and wood is that, logs are the "cut" type of wood
     public static final RegistryObject<Block> HAPPY_LOG = register("happy_log",
-            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.OAK_LOG).strength(3.0f, 10.0f), BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
+            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.OAK_LOG).strength(3.0f, 10.0f),
+                    BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
     public static final RegistryObject<Block> HAPPY_WOOD = register("happy_wood",
-            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.OAK_WOOD).strength(3.0f, 10.0f), BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
+            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.OAK_WOOD).strength(3.0f, 10.0f),
+                    BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
     public static final RegistryObject<Block> STRIPPED_HAPPY_LOG = register("stripped_happy_log",
-            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.STRIPPED_OAK_LOG).strength(3.0f, 10.0f), BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
+            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.STRIPPED_OAK_LOG).strength(3.0f, 10.0f),
+                    BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
     public static final RegistryObject<Block> STRIPPED_HAPPY_WOOD = register("stripped_happy_wood",
-            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(3.0f, 10.0f), BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
+            () -> new ModFlammableRotatedPillarBlock(Block.Properties.copy(Blocks.STRIPPED_OAK_WOOD).strength(3.0f, 10.0f),
+                    BlockTags.LOGS, BlockTags.LOGS_THAT_BURN, BlockTags.MINEABLE_WITH_AXE, BlockTags.OVERWORLD_NATURAL_LOGS));
 
     public static final RegistryObject<Block> HAPPY_PLANKS = register("happy_planks",
             () -> new Block(Block.Properties.copy(Blocks.OAK_PLANKS).strength(3.0f, 10.0f)) {
